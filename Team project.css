@@ -11,7 +11,12 @@
     background-color: #f2f2f2;
     color: #1E3A8A;
   }
-  
+  p {
+    margin: 0 !important;
+  }
+   ul {
+    text-align: left;
+   }
   .navbar {
     background-color: #F97316;
     color: #fff;
@@ -52,6 +57,7 @@
   .welcome p {
     font-size: 18px;
     margin-bottom: 30px;
+    color: #1E3A8A;
   }
   
   .welcome .btn-primary {
@@ -75,11 +81,14 @@
     gap: 30px;
   }
   
-  .main > div {
+  .main .articles {
     text-align: center;
     padding: 20px;
     background-color: #F97316;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    height: 100%;
+    color: white !important;
   }
   
   .main h1 {
@@ -105,6 +114,8 @@
     display: flex;
    align-items:normal;
    justify-content: space-between;
+   width: 12rem;
+   align-items: center;
   }
   .pho{
     width: 400px;
@@ -132,10 +143,16 @@ margin: 100px;
 align-items: center;
 border-radius: 22px;
   }
+  .section img {
+    /* width: 320px; */
+  }
   .container1{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     background-color:#1E3A8A;
+    padding: 11px;
+     border-radius: 18px 18px 0 0;
   }
   .login-container {
     background-color: #fff;
@@ -232,7 +249,10 @@ border-radius: 22px;
   .signup-container .login-link {
     margin-top: 15px;
   }
-
+  .sign-up-btn {
+    color: white !important;
+    background-color: #1E3A8A !important;
+  }
   .signup-container .login-link a {
     color: #1E3A8A;
     text-decoration: none;
@@ -244,6 +264,11 @@ border-radius: 22px;
   .signup-container{
     margin: 222px;
   }
+  .footer-right {
+   align-self: flex-end;
+   color: #F3F4F634;
+  }
+
 @media (max-width: 768px) {
   .navbar .container {
     flex-direction: column;
