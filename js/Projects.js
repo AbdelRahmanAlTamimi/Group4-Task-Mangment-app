@@ -52,32 +52,45 @@ async function createTask()
     })
 }
 
-//Edit not implemented yet
-// async function EditTask()
-// {
-//     const curUserId = new URLSearchParams(window.location.search).get('id');
-//     const response1 = await fetch(`http://localhost:3000/users/${curUserId}`)
-//     const userData = await response1.json()
-//     let ProjectId = 1 //Get it somehow
-//     let taskId = 1 //Get it somehow
-//     let editedProperty = "taskTitle"
-//     let editedTask = { 
-//             editedProperty : "testt", //from dom
-//     }
-//     userData.Projects[id].tasks.push(newTask)
-//     // console.log(userData.Projects[id].tasks)
-//     let edit = {
-//         Projects: userData.Projects
-//     }
-//     fetch(`http://localhost:3000/users/${curUserId}`, {
-//         method : 'PATCH',
-//         headers: {
-//             "Content-Type": "application/json",
-//           },
-//         body : JSON.stringify(edit)       
-//     })
-// }
+async function EditTask()
+{
+    const curUserId = new URLSearchParams(window.location.search).get('id');
+    const response1 = await fetch(`http://localhost:3000/users/${curUserId}`)
+    const userData = await response1.json()
+    let ProjectId = 1 //Get it somehow
+    let taskId = 1 //Get it somehow
+    let editedProperty = "taskTitle" //get it from poperty selected
+    let newEdit = "edited-Title"  // get this from dom
+    userData.Projects[ProjectId].tasks[taskId][editedProperty] = newEdit
+    // console.log(userData.Projects[id].tasks)
+    fetch(`http://localhost:3000/users/${curUserId}`, {
+        method : 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+          },
+        body : JSON.stringify(userData)       
+    })
+}
 
+async function EditProject()
+{
+    const curUserId = new URLSearchParams(window.location.search).get('id');
+    const response1 = await fetch(`http://localhost:3000/users/${curUserId}`)
+    const userData = await response1.json()
+    let ProjectId = 1 //Get it somehow
+    let editedProperty = "title" //get it from poperty selected
+    let newEdit = "edited-Title"  // get this from dom
+    // console.log(userData.Projects[ProjectId][editedProperty])
+    userData.Projects[ProjectId][editedProperty] = newEdit
+    // console.log(userData.Projects[id].tasks) 
+    fetch(`http://localhost:3000/users/${curUserId}`, {
+        method : 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+          },
+        body : JSON.stringify(userData)       
+    })
+}
 
 // Rasha's work: 
 

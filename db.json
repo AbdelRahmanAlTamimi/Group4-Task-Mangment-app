@@ -17,7 +17,7 @@
         },
         {
           "id": 1,
-          "title": "Test-title",
+          "title": "edited-Title",
           "description": "testsdfgsdgdfdesc",
           "content": "test-content",
           "create_date": "10/2",
@@ -33,7 +33,7 @@
             },
             {
               "id": 1,
-              "taskTitle": "testt",
+              "taskTitle": "edited-Title",
               "description": "testd",
               "due_date": "test22",
               "status": "testok",
