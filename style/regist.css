@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 110vh;
+}
+
+nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #F97316;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    display: flex;
+    justify-content:flex-start; 
+}
+
+img {
+    width: 120px;
+    padding: 0.5em;
+}
+
+.reg-container {
+    max-width: 400px;
+    width: 100%;
+    padding: 15px;
+    margin: 100px auto 15px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reg-container label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.reg-container input {
+    width: 95%;
+    padding: 10px;
+    margin: 5px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.reg-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1E3A8A;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.reg-container button:hover {
+    background-color: #142f7a;
+}
+
+
+.register {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register a {
+    color: #1E3A8A;
+    text-decoration: none;
+}
+
+
+@media (max-width: 600px) {
+    .reg-container {
+        width: 100%; 
+        margin: 10px;
+    }
+}

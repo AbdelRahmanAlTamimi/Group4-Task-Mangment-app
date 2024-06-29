@@ -1,0 +1,50 @@
+{
+  "users":[ {
+    "id": "1",
+    "fname": "",
+    "lname": "",
+    "email": "",
+    "password": "",
+    "Projects": [
+      { 
+        "id":"1",
+        "title": "",
+        "description": "",
+        "content": "",
+        "create_date": "",
+        "tasks":[
+          {
+            "taskTitle": "",
+            "description": "",
+            "due_date": "",
+            "status": "",
+            "create_date": ""
+          }
+        ]
+      }
+    ]
+  },{
+    "id": "2",
+    "fname": "",
+    "lname": "",
+    "email": "",
+    "password": "",
+    "Projects": [
+      {
+        "title": "",
+        "description": "",
+        "content": "",
+        "create_date": "",
+        "tasks": [
+          {
+            "taskTitle": "",
+            "description": "",
+            "due_date": "",
+            "status": "",
+            "create_date": ""
+          }
+        ]
+      }
+    ]
+  } ]
+}
