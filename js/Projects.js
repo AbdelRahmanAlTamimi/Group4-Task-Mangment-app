@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 async function createProject()
 {
     const curUserId = new URLSearchParams(window.location.search).get('id');
@@ -16,19 +17,75 @@ async function createProject()
         content: "test-content", //Change to dom controllers
         create_date:  new Date().toLocaleDateString(),
         tasks: []
-      }
-      userData.Projects.push(newPorject) 
-    let edit = {
-        Projects : userData.Projects
+=======
+
+async function createProject() {
+  const curUserId = new URLSearchParams(window.location.search).get("id");
+  const response1 = await fetch(`http://localhost:3000/users/1`);
+  const userData = await response1.json();
+  let newPorject = {
+    id: userData.Projects.length,
+    title: document.getElementById("projectTitle").value, // Change to dom controllers
+    description: document.getElementById("projectDescription").value, // Change to dom controllers
+    content: document.getElementById("projectContent").value, // Change to dom controllers
+    create_date: new Date().toLocaleDateString(), // Change to dom controllers
+    tasks: [],
+  };
+  userData.Projects.push(newPorject);
+  let edit = {
+    Projects: userData.Projects,
+  };
+  await fetch(`http://localhost:3000/users/${curUserId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(edit),
+  });
+
+  // Append child to aside that have the project name & three dots button
+  const projectList = document.getElementById("projectList");
+  const projectItem = document.createElement("div");
+  projectItem.classList.add("project-item");
+
+  const projectName = document.createElement("span");
+  projectName.textContent = newPorject.title;
+
+  const projectMenu = document.createElement("button");
+  projectMenu.textContent = "...";
+  projectMenu.classList.add("project-menu");
+
+  projectItem.appendChild(projectName);
+  projectItem.appendChild(projectMenu);
+  projectList.appendChild(projectItem);
+
+  // When click on this div it will appear the number of tasks for each status
+  projectItem.addEventListener("click", () => {
+    const taskSummary = document.getElementById("taskSummary");
+    taskSummary.innerHTML = `To Do: ${
+      newPorject.tasks.filter((task) => task.status === "To Do").length
     }
-    const response = await fetch(`http://localhost:3000/users/${curUserId}`, {
-        method : 'PATCH',
-        headers: {
-            "Content-Type": "application/json",
-          },
-        body : JSON.stringify(edit)
-    })
+      In Progress: ${
+        newPorject.tasks.filter((task) => task.status === "In Progress").length
+>>>>>>> 5d890ee (beta)
+      }
+      Done: ${
+        newPorject.tasks.filter((task) => task.status === "Done").length
+      }`;
+  });
+
+  // When click on this div it will appear the project details
+  projectItem.addEventListener("click", () => {
+    const projectDetails = document.getElementById("projectDetails");
+    projectDetails.innerHTML = `
+      <h3>${newPorject.title}</h3>
+      <p>${newPorject.description}</p>
+      <p>${newPorject.content}</p>
+      <p>Created on: ${newPorject.create_date}</p>
+    `;
+  });
 }
+<<<<<<< HEAD
 async function createTask(project_id)
 {
     const curUserId = new URLSearchParams(window.location.search).get('id');
@@ -143,6 +200,83 @@ async function wipeUserProjects()
     }
 
 // Rasha's work: 
+=======
+document.getElementById(`project${id}`).addEventListener("click",getProjectDetails())
+async function getProjectDetails() {
+    // get data for project i clicked on it
+    // display this data on page
+
+} 
+async function createTask() {
+  const curUserId = new URLSearchParams(window.location.search).get("id");
+  const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
+  const userData = await response1.json();
+  let id = 1; //Get it somehow
+  let newTask = {
+    id: userData.Projects[id].tasks.length,
+    taskTitle: "testt",
+    description: "testd",
+    due_date: "test22",
+    status: "testok",
+    content: "testcont",
+    create_date: "testcreate",
+  };
+  userData.Projects[id].tasks.push(newTask);
+  // console.log(userData.Projects[id].tasks)
+  let edit = {
+    Projects: userData.Projects,
+  };
+  fetch(`http://localhost:3000/users/${curUserId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(edit),
+  });
+}
+
+
+async function displayProjectDesc() {
+    // get the current project id
+    let curProjecctId = 1;
+    const curUserId = new URLSearchParams(window.location.search).get("id");
+    const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
+    const userData = await response1.json();
+   let project = userData.Projects.find(
+     (project) => project.id == curProjecctId
+   );
+    document.getElementById("project-desc").innerHTML = project.description;
+}
+
+//Edit not implemented yet
+// async function EditTask()
+// {
+//     const curUserId = new URLSearchParams(window.location.search).get('id');
+//     const response1 = await fetch(`http://localhost:3000/users/${curUserId}`)
+//     const userData = await response1.json()
+//     let ProjectId = 1 //Get it somehow
+//     let taskId = 1 //Get it somehow
+//     let editedProperty = "taskTitle"
+//     let editedTask = {
+//             editedProperty : "testt", //from dom
+//     }
+//     userData.Projects[id].tasks.push(newTask)
+//     // console.log(userData.Projects[id].tasks)
+//     let edit = {
+//         Projects: userData.Projects
+//     }
+//     fetch(`http://localhost:3000/users/${curUserId}`, {
+//         method : 'PATCH',
+//         headers: {
+//             "Content-Type": "application/json",
+//           },
+//         body : JSON.stringify(edit)
+//     })
+// }
+
+// Rasha's work:
+
+>>>>>>> 5d890ee (beta)
 // async function getData() {
 //     try{
 //         console.log("a");
@@ -180,7 +314,7 @@ async function wipeUserProjects()
 //      <p>${taskeselement.due_date}</p>
 //      <p>${taskeselement.status}</p>
 //      <p>${taskeselement.create_date}</p> </div>`
-    
+
 //     });
 //     putdom.innerHTML=x
 //     }
@@ -188,3 +322,4 @@ async function wipeUserProjects()
 //         console.error(error)
 //     }
 // }
+
