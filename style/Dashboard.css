@@ -1,0 +1,122 @@
+
+.navbar {
+  background-color: #F97316;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.navbar-brand img {
+  height: 30px;
+}
+
+.btn {
+  background-color: #1E3A8A;
+  color: #f8f6f6;
+  height: 44px;
+  width: 100px;
+  border-radius: 12px;
+}
+
+
+.section1 {
+  padding: 5%;
+  background-color: #f2f2f2;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  max-height: 1000px;
+  overflow-y: auto;
+}
+
+.section1 input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #f5eeee;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.s1 {
+  background-color: #1E3A8A;
+  height: 30px;
+}
+
+.s2, .s3, .s4 {
+  width: 100%; 
+  margin-bottom: 10px;
+}
+
+.t {
+  text-align: center;
+}
+
+.smallbtn {
+  padding: 10px;
+}
+
+.section2 {
+  background-color: #ffffff;
+  padding: 3%;
+}
+
+.section2 h1, .section2 h3 {
+  text-align: center;
+}
+
+.task, .tasky, .taskyy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.task img, .tasky img, .taskyy img {
+  width: 20px;
+  height: 20px;
+}
+
+.task button, .tasky button, .taskyy button {
+  margin-left: auto;
+}
+
+.section3 {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .navbar .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar a {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .section1 {
+    width: 100%;
+  }
+
+  .section2, .section3 {
+    width: 100%;
+  }
+}

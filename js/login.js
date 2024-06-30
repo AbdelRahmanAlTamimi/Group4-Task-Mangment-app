@@ -24,9 +24,10 @@ async function login() {
     if (user) {
       document.getElementById("login-status").style.color = "green";
       document.getElementById("login-status").innerText = "Login successful!";
-      // Redirect to dashboard
       setTimeout(() => {
-        window.location.href = "dashboard.html";
+        window.location.href = `../html/dashboard.html?id=${encodeURIComponent(
+          user.id
+        )}`;
       }, 1000);
     } else {
       document.getElementById("login-status").style.color = "red";

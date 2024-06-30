@@ -23,6 +23,11 @@ async function registrationForm() {
     let newUser = await createUser(data);
     console.log("User created:", newUser);
     document.getElementById("registrationForm").reset();
+
+alert(
+  "The user has been added successfully, you will be redirected to the login page"
+);
+    window.location.href = "login.html";
   }
 }
 
@@ -54,8 +59,7 @@ async function validateUser(data) {
     for (let element of myResponse) {
       if (element.email === data.email) {
         document.getElementById("user-found").style.color = "red";
-        document.getElementById("user-found").innerHTML =
-          "Email is already taken";
+        document.getElementById("user-found").innerHTML ="the email is already taken"
         return true;
       }
     }
