@@ -50,5 +50,37 @@ async function gettaskes() {
 gettaskes();
 
 
+async function deletproject(){
+    const userid = new URLSearchParams(Window.location.search).get('id');
+    const getlastdata = await fetch(`http://localhost:3000/users/${userid}`)
+    const returntojson = await getlastdata.json();
+    const ProjectID = 1 //getfrom dom
+    returntojson.Projects =  returntojson.Projects.filter(cutproject=>cutproject.id !== ProjectID )
+   await fetch(`http://localhost:3000/users/${userid}`,{
+    method:'patch',
+    headers: {
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify(returntojson)
 
+   })
+}
+
+
+async function delettaske(){
+    const userid = new URLSearchParams(location.search).get('id');
+    const getlastdata = await fetch(`http://localhost:3000/users/${userid}`)
+    const returntojson = await getlastdata.json();
+    const ProjectID = 1 //getfrom dom
+    const taskesindex = 2
+    returntojson.Projects[ProjectID].tasks =  returntojson.Projects[ProjectID].tasks.filter(cuttaskes=>cuttaskes.id !== taskesindex)
+   await fetch(`http://localhost:3000/users/${userid}`,{
+    method:'PATCH',
+    headers: {
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify(returntojson)
+
+   })
+}
 

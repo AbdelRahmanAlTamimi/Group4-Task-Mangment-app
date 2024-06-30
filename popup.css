@@ -1,0 +1,129 @@
+  .show-modal {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    top: 50%;
+    left: 50%;
+    /* width: 150px; */
+    height: 40px;
+    margin-top: -20px;
+    margin-left: -75px;
+    background: #3c83e7;
+    color: #fff;
+    border-radius: 5px;
+    border: 0px solid transparent;
+    /* cursor: pointer; */
+  }
+  
+  .show-modal:hover {
+    background: #2068cd;
+  }
+  
+  .show-modal:active {
+    transform: scale(0.9);
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 35px;
+    height: 30px;
+    border-radius: 50%;
+    color: #FF4B2B;
+    cursor: pointer;
+    border: 0;
+  }
+  
+  /* .mask-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(52, 73, 94, 0.8);
+    z-index: 50;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.7s;
+  } */
+  
+  .modal {
+    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 300px;
+    margin-left: -200px;
+    margin-top: -150px;
+    background: #fdfffe;
+    z-index: 100;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s ease-out;
+    transform: translateY(20px);
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 10px 42px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 4px 10px 42px 0px rgba(0,0,0,0.75);
+box-shadow: 4px 10px 42px 0px rgba(0,0,0,0.75);
+  }
+  
+  .active {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .modal-active {
+    visibility: visible;
+    opacity: 1;
+    display: flex;
+  }
+  
+  .insidee{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    row-gap: 20px;
+    margin-top: 30px;
+  }
+  #dis{
+   min-height: 50px;
+border: solid #FF4B2B;;
+border-radius: 10px;
+  }
+
+  .add-btn{
+    background: #FF4B2B;
+border: none;
+height: 30px;
+width: 70px;
+border-radius: 10px;
+cursor: pointer;
+color: white;
+
+  }
+  .add-btn:hover{
+    background: #FF416C;;
+  }
+.date{
+  border:solid #FF4B2B 0.5px;
+border-radius: 5px;
+color: rgb(255, 255, 255);
+background: #FF4B2B;
+width: 150px;
+padding: 5px;
+
+}
+#drp-li{
+    border-radius: 5px;
+    border:solid #FF416C 0.5px;
+}
+.prjct{
+    border-radius: 5px;
+    border:solid #FF4B2B 0.5px;
+    padding: 5px;
+}
+  
