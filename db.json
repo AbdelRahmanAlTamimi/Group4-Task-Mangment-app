@@ -12,7 +12,7 @@
           "title": "Test-title",
           "description": "testsdfgsdgdfdesc",
           "content": "test-content",
-          "create_date": "10/2",
+          "create_date": "6/30/2024",
           "tasks": []
         },
         {
@@ -20,7 +20,7 @@
           "title": "edited-Title",
           "description": "testsdfgsdgdfdesc",
           "content": "test-content",
-          "create_date": "10/2",
+          "create_date": "6/30/2024",
           "tasks": [
             {
               "id": 0,
@@ -29,16 +29,20 @@
               "due_date": "test22",
               "status": "testok",
               "content": "testcont",
-              "create_date": "testcreate"
+              "create_date": "6/30/2024",
+              "progress_date": [],
+              "done_date": []
             },
             {
               "id": 1,
-              "taskTitle": "edited-Title",
+              "taskTitle": "testt",
               "description": "testd",
               "due_date": "test22",
               "status": "testok",
               "content": "testcont",
-              "create_date": "testcreate"
+              "create_date": "6/30/2024",
+              "progress_date": [],
+              "done_date": []
             },
             {
               "id": 2,
@@ -47,9 +51,66 @@
               "due_date": "test22",
               "status": "testok",
               "content": "testcont",
-              "create_date": "testcreate"
+              "create_date": "6/30/2024",
+              "progress_date": [],
+              "done_date": []
+            },
+            {
+              "id": 3,
+              "taskTitle": "testt",
+              "description": "testd",
+              "due_date": "test22",
+              "status": "testok",
+              "content": "testcont",
+              "create_date": "6/30/2024",
+              "progress_date": [],
+              "done_date": []
+            },
+            {
+              "id": 4,
+              "taskTitle": "testt",
+              "description": "testd",
+              "due_date": "test22",
+              "status": "testok",
+              "content": "testcont",
+              "create_date": "6/30/2024",
+              "progress_date": [],
+              "done_date": []
+            },
+            {
+              "id": 5,
+              "taskTitle": "testt",
+              "description": "testd",
+              "due_date": "test22",
+              "status": "testok",
+              "content": "testcont",
+              "create_date": "6/30/2024",
+              "progress_date": [],
+              "done_date": []
+            },
+            {
+              "id": 6,
+              "taskTitle": "testt",
+              "description": "testd",
+              "due_date": "test22",
+              "status": "testok",
+              "content": "testcont",
+              "history": [
+                {
+                  "status": "To-do",
+                  "date": "6/30/2024"
+                }
+              ]
             }
           ]
+        },
+        {
+          "id": 2,
+          "title": "Test-title",
+          "description": "testsdfgsdgdfdesc",
+          "content": "test-content",
+          "create_date": "6/30/2024",
+          "tasks": []
         }
       ]
     }

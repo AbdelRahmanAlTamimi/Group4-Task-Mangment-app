@@ -3,12 +3,18 @@ async function createProject()
     const curUserId = new URLSearchParams(window.location.search).get('id');
     const response1 = await fetch(`http://localhost:3000/users/1`)
     const userData = await response1.json()
+    let newProjectId = 0;
+    if(userData.Projects.length == 0) newProjectId = 0;
+    else {
+        newProjectId = userData.Projects[userData.Projects.length - 1].id + 1
+    }
+
     let newPorject = {
-        id : userData.Projects.length,
+        id : newProjectId,
         title: "Test-title",   //Change to dom controllers
         description: "testsdfgsdgdfdesc", //Change to dom controllers
         content: "test-content", //Change to dom controllers
-        create_date: "10/2", //Change to dom controllers
+        create_date:  new Date().toLocaleDateString(),
         tasks: []
       }
       userData.Projects.push(newPorject) 
@@ -23,27 +29,30 @@ async function createProject()
         body : JSON.stringify(edit)
     })
 }
-async function createTask()
+async function createTask(project_id)
 {
     const curUserId = new URLSearchParams(window.location.search).get('id');
     const response1 = await fetch(`http://localhost:3000/users/${curUserId}`)
     const userData = await response1.json()
-    let id = 1 //Get it somehow
+    let ProjectID = project_id
     let newTask = {
-            id: userData.Projects[id].tasks.length,
+            id: userData.Projects[ProjectID].tasks.length,
             taskTitle: "testt",
             description: "testd",
             due_date: "test22",
             status: "testok",
             content: "testcont",
-            create_date: "testcreate"
+            history: [{
+                status: "To-do",
+                date : new Date().toLocaleDateString()
+            }]
     }
-    userData.Projects[id].tasks.push(newTask)
+    userData.Projects[ProjectID].tasks.push(newTask)
     // console.log(userData.Projects[id].tasks)
     let edit = {
         Projects: userData.Projects
     }
-    fetch(`http://localhost:3000/users/${curUserId}`, {
+    await fetch(`http://localhost:3000/users/${curUserId}`, {
         method : 'PATCH',
         headers: {
             "Content-Type": "application/json",
@@ -52,36 +61,33 @@ async function createTask()
     })
 }
 
-async function EditTask()
+async function EditTask(project_id,task_id)
 {
     const curUserId = new URLSearchParams(window.location.search).get('id');
     const response1 = await fetch(`http://localhost:3000/users/${curUserId}`)
     const userData = await response1.json()
-    let ProjectId = 1 //Get it somehow
-    let taskId = 1 //Get it somehow
+    let ProjectId = project_id //Get it somehow
+    let taskId = task_id //Get it somehow
     let editedProperty = "taskTitle" //get it from poperty selected
     let newEdit = "edited-Title"  // get this from dom
     userData.Projects[ProjectId].tasks[taskId][editedProperty] = newEdit
-    // console.log(userData.Projects[id].tasks)
     fetch(`http://localhost:3000/users/${curUserId}`, {
         method : 'PATCH',
-        headers: {
-            "Content-Type": "application/json",
-          },
+        headers: { "Content-Type": "application/json",},
         body : JSON.stringify(userData)       
     })
 }
 
-async function EditProject()
+async function EditProject(project_id, edited_property, edited_value)    
 {
     const curUserId = new URLSearchParams(window.location.search).get('id');
     const response1 = await fetch(`http://localhost:3000/users/${curUserId}`)
     const userData = await response1.json()
-    let ProjectId = 1 //Get it somehow
-    let editedProperty = "title" //get it from poperty selected
-    let newEdit = "edited-Title"  // get this from dom
+    let ProjectId = project_id //Get it somehow
+    let editedProperty = edited_property //get it from poperty selected
+    let newEdit = edited_value  // get this from dom
     // console.log(userData.Projects[ProjectId][editedProperty])
-    userData.Projects[ProjectId][editedProperty] = newEdit
+    userData.Projects[ProjectId][editedProperty] = newEdit;
     // console.log(userData.Projects[id].tasks) 
     fetch(`http://localhost:3000/users/${curUserId}`, {
         method : 'PATCH',
@@ -92,8 +98,51 @@ async function EditProject()
     })
 }
 
-// Rasha's work: 
+async function deletproject(project_id){
+    const userid = new URLSearchParams(window.location.search).get('id');
+    const getlastdata = await fetch(`http://localhost:3000/users/${userid}`)
+    const returntojson = await getlastdata.json();
+    const ProjectID = project_id //getfrom dom
+    returntojson.Projects =  returntojson.Projects.filter(cutproject=>cutproject.id !== ProjectID )
+    returntojson.Projects.forEach((element, index) => {
+        element.id = index;
+    });
+    await fetch(`http://localhost:3000/users/${userid}`, {
+        method : 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+          },
+        body : JSON.stringify(returntojson) 
+    })
+}
 
+async function deleteTask(task_id, project_id){
+    const userid = new URLSearchParams(location.search).get('id');
+    const getlastdata = await fetch(`http://localhost:3000/users/${userid}`)
+    const returntojson = await getlastdata.json();
+    const ProjectID = project_id //getfrom dom 
+    const taskesindex = task_id //get from dom
+    returntojson.Projects[ProjectID].tasks =  returntojson.Projects[ProjectID].tasks.filter(cuttaskes=>cuttaskes.id !== taskesindex)
+    returntojson.Projects[ProjectID].tasks.forEach((element, index) => {
+        element.id = index;
+    });
+   await fetch(`http://localhost:3000/users/${userid}`,{
+    method:'PATCH',
+    headers: {
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify(returntojson)
+
+   })
+}
+
+
+async function wipeUserProjects()
+    {
+        //idk if this is really needed ngl
+    }
+
+// Rasha's work: 
 // async function getData() {
 //     try{
 //         console.log("a");
