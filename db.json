@@ -1,42 +1,57 @@
 {
   "users": [
     {
-      "id": "0"
-    },
-    {
       "id": "1",
-      "fname": "abood",
-      "lname": "tamimi",
-      "email": "tamimi6030@gmail.com",
-      "password": "1234"
-    },
-    {
-      "id": "2",
-      "fname": "",
-      "lname": "",
+      "fname": "qqqqq",
+      "lname": "qqqqq",
       "email": "",
-      "password": ""
-    },
-    {
-      "id": "3",
-      "fname": "abood",
-      "lname": "tamimi",
-      "email": "student982@kaa.com",
-      "password": "1234"
-    },
-    {
-      "id": "4",
-      "fname": "jehad",
-      "lname": "meshal",
-      "email": "haditamimi2010@gmail.com",
-      "password": "1234"
-    },
-    {
-      "id": "5",
-      "fname": "jehad",
-      "lname": "meshal",
-      "email": "hi@gmial",
-      "password": "1"
+      "password": "",
+      "Projects": [
+        {
+          "id": 0,
+          "title": "Test-title",
+          "description": "testsdfgsdgdfdesc",
+          "content": "test-content",
+          "create_date": "10/2",
+          "tasks": []
+        },
+        {
+          "id": 1,
+          "title": "Test-title",
+          "description": "testsdfgsdgdfdesc",
+          "content": "test-content",
+          "create_date": "10/2",
+          "tasks": [
+            {
+              "id": 0,
+              "taskTitle": "testt",
+              "description": "testd",
+              "due_date": "test22",
+              "status": "testok",
+              "content": "testcont",
+              "create_date": "testcreate"
+            },
+            {
+              "id": 1,
+              "taskTitle": "testt",
+              "description": "testd",
+              "due_date": "test22",
+              "status": "testok",
+              "content": "testcont",
+              "create_date": "testcreate"
+            },
+            {
+              "id": 2,
+              "taskTitle": "testt",
+              "description": "testd",
+              "due_date": "test22",
+              "status": "testok",
+              "content": "testcont",
+              "create_date": "testcreate"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
