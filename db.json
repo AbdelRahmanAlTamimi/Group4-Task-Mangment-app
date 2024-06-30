@@ -11,16 +11,24 @@
           "id": 0,
           "title": "Test-title",
           "description": "testsdfgsdgdfdesc",
+<<<<<<< HEAD
           "content": "test-content",
           "create_date": "6/30/2024",
+=======
+          "create_date": "10/2",
+>>>>>>> 1e40719 (beta)
           "tasks": []
         },
         {
           "id": 1,
           "title": "edited-Title",
           "description": "testsdfgsdgdfdesc",
+<<<<<<< HEAD
           "content": "test-content",
           "create_date": "6/30/2024",
+=======
+          "create_date": "10/2",
+>>>>>>> 1e40719 (beta)
           "tasks": [
             {
               "id": 0,
@@ -28,10 +36,14 @@
               "description": "testd",
               "due_date": "test22",
               "status": "testok",
+<<<<<<< HEAD
               "content": "testcont",
               "create_date": "6/30/2024",
               "progress_date": [],
               "done_date": []
+=======
+              "create_date": "testcreate"
+>>>>>>> 1e40719 (beta)
             },
             {
               "id": 1,
@@ -39,10 +51,14 @@
               "description": "testd",
               "due_date": "test22",
               "status": "testok",
+<<<<<<< HEAD
               "content": "testcont",
               "create_date": "6/30/2024",
               "progress_date": [],
               "done_date": []
+=======
+              "create_date": "testcreate"
+>>>>>>> 1e40719 (beta)
             },
             {
               "id": 2,
@@ -50,6 +66,7 @@
               "description": "testd",
               "due_date": "test22",
               "status": "testok",
+<<<<<<< HEAD
               "content": "testcont",
               "create_date": "6/30/2024",
               "progress_date": [],
@@ -101,18 +118,27 @@
                   "date": "6/30/2024"
                 }
               ]
+=======
+              "create_date": "testcreate"
+>>>>>>> 1e40719 (beta)
             }
           ]
         },
         {
           "id": 2,
+<<<<<<< HEAD
           "title": "Test-title",
           "description": "testsdfgsdgdfdesc",
           "content": "test-content",
+=======
+          "title": "hi",
+          "description": "",
+>>>>>>> 1e40719 (beta)
           "create_date": "6/30/2024",
           "tasks": []
         }
       ]
     }
   ]
+
 }

@@ -21,26 +21,24 @@ async function createProject()
 
 async function createProject() {
   const curUserId = new URLSearchParams(window.location.search).get("id");
-  const response1 = await fetch(`http://localhost:3000/users/1`);
+  const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
   const userData = await response1.json();
   let newPorject = {
     id: userData.Projects.length,
-    title: document.getElementById("projectTitle").value, // Change to dom controllers
-    description: document.getElementById("projectDescription").value, // Change to dom controllers
-    content: document.getElementById("projectContent").value, // Change to dom controllers
+    // title: document.getElementById("projectTitle").value, // Change to dom controllers
+    title: "hi", // Change to dom controllers
+    description:"", //document.getElementById("projectDescription").value, // Change to dom controllers
     create_date: new Date().toLocaleDateString(), // Change to dom controllers
     tasks: [],
   };
   userData.Projects.push(newPorject);
-  let edit = {
-    Projects: userData.Projects,
-  };
+  
   await fetch(`http://localhost:3000/users/${curUserId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(edit),
+    body: JSON.stringify(userData),
   });
 
   // Append child to aside that have the project name & three dots button
@@ -85,6 +83,7 @@ async function createProject() {
     `;
   });
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 async function createTask(project_id)
 {
@@ -202,6 +201,9 @@ async function wipeUserProjects()
 // Rasha's work: 
 =======
 document.getElementById(`project${id}`).addEventListener("click",getProjectDetails())
+=======
+// document.getElementById(`project${id}`).addEventListener("click",getProjectDetails())
+>>>>>>> 1e40719 (beta)
 async function getProjectDetails() {
     // get data for project i clicked on it
     // display this data on page
