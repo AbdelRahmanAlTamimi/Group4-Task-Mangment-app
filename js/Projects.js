@@ -1,7 +1,7 @@
 async function createProject()
 {
     const curUserId = new URLSearchParams(window.location.search).get('id');
-    const response1 = await fetch(`http://localhost:3000/users/1`)
+    const response1 = await fetch(`http://localhost:3000/users/${curUserId}`)
     const userData = await response1.json()
     let newProjectId = 0;
     if(userData.Projects.length == 0) newProjectId = 0;
@@ -17,16 +17,13 @@ async function createProject()
         create_date:  new Date().toLocaleDateString(),
         tasks: []
       }
-      userData.Projects.push(newPorject) 
-    let edit = {
-        Projects : userData.Projects
-    }
+      userData.Projects.push(newPorject)
     const response = await fetch(`http://localhost:3000/users/${curUserId}`, {
         method : 'PATCH',
         headers: {
             "Content-Type": "application/json",
           },
-        body : JSON.stringify(edit)
+        body : JSON.stringify(userData)
     })
 }
 async function createTask(project_id)
@@ -61,15 +58,15 @@ async function createTask(project_id)
     })
 }
 
-async function EditTask(project_id,task_id)
+async function EditTask(project_id, task_id, selected_property, new_value)
 {
     const curUserId = new URLSearchParams(window.location.search).get('id');
     const response1 = await fetch(`http://localhost:3000/users/${curUserId}`)
     const userData = await response1.json()
     let ProjectId = project_id //Get it somehow
     let taskId = task_id //Get it somehow
-    let editedProperty = "taskTitle" //get it from poperty selected
-    let newEdit = "edited-Title"  // get this from dom
+    let editedProperty = selected_property //the property to be edited
+    let newEdit = new_value  // the new value for the edited property
     userData.Projects[ProjectId].tasks[taskId][editedProperty] = newEdit
     fetch(`http://localhost:3000/users/${curUserId}`, {
         method : 'PATCH',
@@ -78,17 +75,15 @@ async function EditTask(project_id,task_id)
     })
 }
 
-async function EditProject(project_id, edited_property, edited_value)    
+async function EditProject(project_id, edited_property, edited_value)
 {
     const curUserId = new URLSearchParams(window.location.search).get('id');
     const response1 = await fetch(`http://localhost:3000/users/${curUserId}`)
     const userData = await response1.json()
     let ProjectId = project_id //Get it somehow
-    let editedProperty = edited_property //get it from poperty selected
-    let newEdit = edited_value  // get this from dom
-    // console.log(userData.Projects[ProjectId][editedProperty])
+    let editedProperty = edited_property //what property to edit
+    let newEdit = edited_value  // the new value for the edited property
     userData.Projects[ProjectId][editedProperty] = newEdit;
-    // console.log(userData.Projects[id].tasks) 
     fetch(`http://localhost:3000/users/${curUserId}`, {
         method : 'PATCH',
         headers: {
