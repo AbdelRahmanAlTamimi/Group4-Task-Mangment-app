@@ -30,7 +30,7 @@
         <div class="header flex items-center justify-between">
           <h1 class="title">My tasks</h1>
           <div class="buttons-container">
-            <button id="add-task-cta"class="button regular-button blue-background show-modal"aria-haspopup="true">
+            <button id="add-task-cta"class="button regular-button blue-background"aria-haspopup="true">
               Add task
             </button>
             <button class="sign-out-cta" id="signOut">Sign out</button>
@@ -184,67 +184,61 @@
         </form>
       </div>
     </div>
-    <!-- view task -->
+    <!-- view task info -->
     <div id="view-task-overlay" class="overlay view-task-overlay hide">
       <div class="overlay-content green-background">
         <!-- close button -->
-        <button
-          class="button circle-button blue-background flex justify-center items-center close-button"
-        >
-          <iconify-icon
-            icon="material-symbols:close-rounded"
-            style="color: black"
-            width="26"
-            height="26"
-          ></iconify-icon>
+        <button class="button circle-button blue-background flex justify-center items-center close-button">
+          <iconify-icon icon="material-symbols:close-rounded" style="color: black" width="26" height="26"></iconify-icon>
         </button>
+        <!-- close button -->
+         <!-- info -->
+          <p id="curTaskId" class="hidden"></p>
         <h1 class="header no-margin">Name</h1>
-        <p class="value">some long task name</p>
+        <p class="value" id="curTaskTitle"></p>
         <h1 class="header">Description</h1>
-        <p class="value">
-          some long task namesome long task namesome long task name
-        </p>
+        <p class="value" id="curTaskDesc"></p>
         <div class="flex items-center">
-          <h1 class="header min-width">Due date</h1>
-          <p class="value">January 7, 2020</p>
+          <h1 class="header">Due date</h1> <br>
+          <p class="value" id="curTaskDueDate"></p>
         </div>
         <div class="flex items-center">
           <h1 class="header min-width">Status</h1>
-          <p class="value status-value">
-            <span class="circle blue-background"></span><span>Doing</span>
+          <p class="value status-value" id="curTaskStatus">
+            <span class="circle blue-background"></span><span></span>
           </p>
         </div>
+        <!-- info -->
+        <!-- footer button -->
         <div class="control-buttons-container">
           <!-- edit button -->
-          <button
-            class="button circle-button pink-background flex justify-center items-center"
-          >
-            <iconify-icon
-              icon="material-symbols:edit-rounded"
-              style="color: black"
-              width="24"
-              height="24"
-            ></iconify-icon>
+          <button class="button circle-button pink-background flex justify-center items-center" aria-haspopup="true" id="editBtn">
+            <iconify-icon icon="material-symbols:edit-rounded" style="color: black" width="24" height="24"></iconify-icon>
+          </button>
+          <!-- edit button -->
+          <!-- delete button -->
+          <button id="delete-task-cta" class="button circle-button pink-background flex justify-center items-center">
+            <iconify-icon icon="ic:round-delete" style="color: black" width="24" height="24"></iconify-icon>
           </button>
           <!-- delete button -->
-          <button
-            id="delete-task-cta"
-            class="button circle-button pink-background flex justify-center items-center"
-          >
-            <iconify-icon
-              icon="ic:round-delete"
-              style="color: black"
-              width="24"
-              height="24"
-            ></iconify-icon>
-          </button>
         </div>
+        <!-- footer button -->
       </div>
-    </div>
+
+      
+      
+        
+      
+       
+      
+    
+    
     <!-- import IconifyIcon web component -->
     <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>
     <!-- js -->
     <script src="../js/main.js"></script>
     <script src="../js/dashBoard.js"></script>
+    
+    
   </body>
 </html>

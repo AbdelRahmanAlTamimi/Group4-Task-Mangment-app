@@ -1,5 +1,6 @@
 const curUserId = new URLSearchParams(window.location.search).get("id");
 sessionStorage.setItem("curUserId", curUserId);
+// const taskItems = document.querySelectorAll(".task-item");
 
 async function createProject() {
   const curUserId = new URLSearchParams(window.location.search).get("id");
@@ -65,19 +66,52 @@ async function createProject() {
   });
 }
 
-let addTaskBtn = document.getElementById("addTask");
-addTaskBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  createTask(1);
-});
-addTaskBtn.addEventListener("click", () => {
-  activeOverlay.classList.add("hide");
-  activeOverlay = null;
-  // reenable scrolling
-  document.body.classList.remove("overflow-hidden");
-});
+
+// start create task
+  const taskButtons = document.querySelectorAll(".task-button");
+  taskButtons.forEach((taskButton) => {
+    taskButton.addEventListener("click", handleTaskClick);
+  });
+
+  let addTaskBtn = document.getElementById("addTask");
+  if (addTaskBtn) {
+    addTaskBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      createTask(1);
+    });
+
+    addTaskBtn.addEventListener("click", () => {
+      if (activeOverlay) {
+        activeOverlay.classList.add("hide");
+        activeOverlay = null;
+        document.body.classList.remove("overflow-hidden");
+      }
+    });
+  }
+
+
+function handleTaskClick(id,title,desc,due_date,status) {
+  if (viewTaskOverlay) {
+    viewTaskOverlay.classList.remove("hide")
+    document.getElementById("curTaskId").textContent=id;
+    document.getElementById("curTaskTitle").textContent = title;
+    document.getElementById("curTaskDesc").textContent = desc;
+    document.getElementById("curTaskDueDate").textContent=due_date;
+    document.getElementById("curTaskStatus").textContent=status;
+    activeOverlay = viewTaskOverlay;
+    document.body.classList.add("overflow-hidden");
+  }
+}
+
+
+
 async function createTask(project_id) {
   const curUserId = sessionStorage.getItem("curUserId");
+  if (!curUserId) {
+    console.error("User ID is null");
+    return;
+  }
+
   let taskTitle = document.getElementById("name").value;
   let taskDesc = document.getElementById("description").value;
   let taskDueDate = document.getElementById("Duedate").value;
@@ -85,6 +119,9 @@ async function createTask(project_id) {
 
   try {
     const response = await fetch(`http://localhost:3000/users/${curUserId}`);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
     const userData = await response.json();
     const newTask = {
       id: userData.Projects[project_id].tasks.length,
@@ -103,41 +140,62 @@ async function createTask(project_id) {
     console.log(newTask);
     userData.Projects[project_id].tasks.push(newTask);
 
-    await fetch(`http://localhost:3000/users/${curUserId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ Projects: userData.Projects }),
-    });
+    const updateResponse = await fetch(
+      `http://localhost:3000/users/${curUserId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ Projects: userData.Projects }),
+      }
+    );
+    if (!updateResponse.ok) {
+      throw new Error("Network response was not ok");
+    }
+
     const content = `<li class="task-item">
                 <button class="task-button">
                   <p class="task-name">${newTask.taskTitle}</p>
                   <p class="task-due-date">Due on ${newTask.due_date}</p>
-                  
                   <iconify-icon icon="material-symbols:arrow-back-ios-rounded" style="color: black" width="18" height="18" class="arrow-icon"></iconify-icon>
                 </button>
               </li>`;
+    
     const myNewTask = document.createElement("div");
     myNewTask.innerHTML = content;
+
+    let newTaskElement;
     if (newTask.status == "to-do") {
       const ulTo_do = document.getElementById("ulTo-do");
-      ulTo_do.appendChild(myNewTask.firstElementChild);
+      newTaskElement = ulTo_do.appendChild(myNewTask.firstElementChild);
     } else if (newTask.status == "in-progress") {
       const ulDoing = document.getElementById("ulDoing");
-      ulDoing.appendChild(myNewTask.firstElementChild);
+      newTaskElement = ulDoing.appendChild(myNewTask.firstElementChild);
     } else {
       const ulDone = document.getElementById("ulDone");
-      ulDone.appendChild(myNewTask.firstElementChild);
+      newTaskElement = ulDone.appendChild(myNewTask.firstElementChild);
     }
+
+    if (newTaskElement) {
+      newTaskElement
+        .querySelector(".task-button")
+        .addEventListener("click", () => {
+          handleTaskClick(newTask.id,newTask.taskTitle,newTask.description,newTask.due_date,newTask.status);
+        } )
+    }
+
     document.getElementById("addTaskForm").reset();
   } catch (error) {
     console.error("Error:", error);
   }
 }
+//  end create task
+
+
 
 async function EditTask() {
-  const curUserId = new URLSearchParams(window.location.search).get("id");
+  const curUserId = sessionStorage.getItem("curUserId");
   const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
   const userData = await response1.json();
   let ProjectId = 1; //Get it somehow
@@ -230,9 +288,7 @@ async function deleteTask(task_id, project_id) {
   });
 }
 
-async function wipeUserProjects() {
-  //idk if this is really needed ngl
-}
+
 
 // Rasha's work:
 
