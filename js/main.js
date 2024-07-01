@@ -80,10 +80,7 @@ closeButtons.forEach((button) => {
   });
 });
 
-// open status dropdown
-statusSelect.addEventListener("click", () => {
-  statusDropdown.classList.toggle("hide");
-});
+
 
 // click a task
 taskItems.forEach((task) => {

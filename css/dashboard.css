@@ -72,6 +72,7 @@ body.overflow-hidden {
   position: absolute;
 }
 
+
 /* direct sibling */
 .radio-buttons-container .radio-input:checked + .radio-label {
   background-color: var(--pink);
@@ -176,55 +177,6 @@ body.overflow-hidden {
   /* vertical center */
   display: flex;
   align-items: center;
-}
-
-/* board view */
-.board-view {
-  margin-top: var(--space-32);
-  /* enable horizontal scroll when needed */
-  overflow-x: auto;
-  padding: 0 var(--space-8) var(--space-8);
-  display: grid;
-  grid-template-columns: repeat(3, minmax(266px, 1fr));
-  column-gap: var(--space-24);
-  /* hide scrollbars in Firefox */
-  scrollbar-width: none;
-}
-
-.board-view.hide {
-  display: none;
-}
-
-/* hide scrollbars without impacting scrolling */
-/* Chrome, Safari, Opera, and other WebKit-based browsers */
-.board-view::-webkit-scrollbar {
-  display: none;
-}
-
-.board-view .task-item {
-  margin-top: var(--space-16);
-  background-color: var(--white);
-  border: 2px solid var(--black);
-  border-radius: var(--radius-8);
-}
-
-.board-view .tasks-list.pink .task-item {
-  box-shadow: var(--pink-shadow);
-}
-
-.board-view .tasks-list.blue .task-item {
-  box-shadow: var(--blue-shadow);
-}
-
-.board-view .tasks-list.green .task-item {
-  box-shadow: var(--green-shadow);
-}
-
-.board-view .task-item .task-button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-24) var(--space-16);
 }
 
 /* overlay */
@@ -355,4 +307,12 @@ body.overflow-hidden {
     grid-row: auto / auto;
     height: auto;
   }
+}
+select{
+  display: block;
+  margin-top: 16px;
+  border: 2px solid black;
+  border-radius: var(--radius-8);
+  width: 100%;
+
 }
