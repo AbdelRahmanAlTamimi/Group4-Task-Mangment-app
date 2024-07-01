@@ -80,6 +80,7 @@ body {
 }
 
 body {
+  position: relative;
   background-color: var(--beige);
   font-family: var(--font-family);
 }
@@ -161,8 +162,8 @@ body {
 }
 
 .circle {
-  width: 14px;
-  height: 14px;
+  width: 14px !important;
+  height: 14px !important;
   border-radius: 100%;
 }
 
@@ -240,6 +241,13 @@ body {
   margin-top: var(--space-32);
 }
 
+#project-quickview {
+  width: 55px;
+  border: 1px solid;
+  background-color: #dddddd;
+  position: absolute;
+  visibility: hidden;
+}
 /* media queries */
 @media (min-width: 768px) {
   .divided-inputs-container {
