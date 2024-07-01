@@ -24,35 +24,30 @@ let activeProject = projects[0];
 //** event listeners **//
 // radio buttons for view option
 radioViewOptions.forEach((radioButton) => {
-  radioButton.parentNode.addEventListener("mouseenter", (e) =>
+  radioButton.parentNode.addEventListener("mouseenter",async (e) =>
     { 
+      // quickview.style.visibility = "visible"
+      await setTimeout(() => {
+        quickview.style.visibility = "visible"
+      },1000);
       quickview.style.top = e.clientY + "px"
       quickview.style.left = e.clientX + "px"
       quickview.style.visibility = "visible"
-    })
-    radioButton.parentNode.addEventListener("mouseout", (e) =>
-      { 
+      await setTimeout(() => {
         quickview.style.visibility = "hidden"
-      })
-  radioButton.addEventListener("change", (event) => {
-    const eventTarget = event.target;
-    const viewOption = eventTarget.value;
-    // console.log(eventTarget)
-    switch (viewOption) {
-      case "list":
-        activeProject.classList.add("hide");
-        // console.log(viewOption)
-        activeProject = projects[0]
-        activeProject.classList.remove("hide");
-        break;
-        case "board":
-          // console.log(viewOption)
-          activeProject.classList.add("hide");
-          activeProject = projects[1]
-          activeProject.classList.remove("hide");
-        break;
-    }
-  });
+      },3000);
+
+    })
+
+  // radioButton.addEventListener("change", (event) => {
+  //   const eventTarget = event.target;
+  //   const viewOption = eventTarget.value;
+  //   // console.log(eventTarget)
+  //       document.getElementById("ulTo-do").innerHTML = "";
+  //       activeProject = projects[viewOption]
+  //       activeProject.classList.remove("hide");
+  //       renderTasks(viewOption);
+  // });
 });
 
 // add task

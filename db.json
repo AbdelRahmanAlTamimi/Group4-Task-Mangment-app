@@ -12,13 +12,6 @@
           "title": "Test-title",
           "description": "testsdfgsdgdfdesc",
           "create_date": "10/2",
-          "tasks": []
-        },
-        {
-          "id": 1,
-          "title": "Test-title",
-          "description": "testsdfgsdgdfdesc",
-          "create_date": "10/2",
           "tasks": [
             {
               "id": 0,
@@ -316,8 +309,41 @@
                   "date": "7/1/2024"
                 }
               ]
+            },
+            {
+              "id": 24,
+              "taskTitle": "test hatamleh 1111",
+              "description": "",
+              "due_date": "2024-08-10",
+              "status": "done",
+              "history": [
+                {
+                  "status": "done",
+                  "date": "7/1/2024"
+                }
+              ]
+            },
+            {
+              "id": 25,
+              "taskTitle": "abed",
+              "description": "",
+              "due_date": "2024-08-09",
+              "status": "in-progress",
+              "history": [
+                {
+                  "status": "in-progress",
+                  "date": "7/1/2024"
+                }
+              ]
             }
           ]
+        },
+        {
+          "id": 1,
+          "title": "hi",
+          "description": "",
+          "create_date": "6/30/2024",
+          "tasks": []
         },
         {
           "id": 2,
@@ -328,125 +354,6 @@
         },
         {
           "id": 3,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 4,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 5,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 6,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 7,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 8,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 9,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 10,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 11,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 12,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 13,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 14,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 15,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 16,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 17,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 18,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 19,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 20,
           "title": "hi",
           "description": "",
           "create_date": "6/30/2024",

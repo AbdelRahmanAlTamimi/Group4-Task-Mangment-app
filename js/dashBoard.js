@@ -1,6 +1,13 @@
 const curUserId = new URLSearchParams(window.location.search).get("id");
 sessionStorage.setItem("curUserId", curUserId);
-
+getUserName()
+renderProjects()
+async function getUserName() 
+{
+  const response = await fetch(`http://localhost:3000/users/${curUserId}`)
+  const data = await response.json()
+  document.getElementById("greeting").innerText = "Welcome " + data.fname
+}
 async function createProject() {
   const curUserId = new URLSearchParams(window.location.search).get("id");
   const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
@@ -24,7 +31,7 @@ async function createProject() {
   });
 
   // Append child to aside that have the project name & three dots button
-  const projectList = document.getElementById("projectList");
+  const projectList = document.getElementById("project-display");
   const projectItem = document.createElement("div");
   projectItem.classList.add("project-item");
 
@@ -65,19 +72,43 @@ async function createProject() {
   });
 }
 
+const taskButtons = document.querySelectorAll(".task-button");
+taskButtons.forEach((taskButton) => {
+  taskButton.addEventListener("click", handleTaskClick);
+});
+
 let addTaskBtn = document.getElementById("addTask");
-addTaskBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  createTask(1);
-});
-addTaskBtn.addEventListener("click", () => {
-  activeOverlay.classList.add("hide");
-  activeOverlay = null;
-  // reenable scrolling
-  document.body.classList.remove("overflow-hidden");
-});
+if (addTaskBtn) {
+  addTaskBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    createTask(1);
+  });
+
+  addTaskBtn.addEventListener("click", () => {
+    if (activeOverlay) {
+      activeOverlay.classList.add("hide");
+      activeOverlay = null;
+      document.body.classList.remove("overflow-hidden");
+    }
+  });
+}
+
+ function handleTaskClick() {
+  if (viewTaskOverlay) {
+    viewTaskOverlay.classList.remove("hide");
+    document.getElementById
+    activeOverlay = viewTaskOverlay;
+    document.body.classList.add("overflow-hidden");
+  }
+}
+
 async function createTask(project_id) {
   const curUserId = sessionStorage.getItem("curUserId");
+  if (!curUserId) {
+    console.error("User ID is null");
+    return;
+  }
+
   let taskTitle = document.getElementById("name").value;
   let taskDesc = document.getElementById("description").value;
   let taskDueDate = document.getElementById("Duedate").value;
@@ -85,7 +116,11 @@ async function createTask(project_id) {
 
   try {
     const response = await fetch(`http://localhost:3000/users/${curUserId}`);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
     const userData = await response.json();
+    console.log(userData)
     const newTask = {
       id: userData.Projects[project_id].tasks.length,
       taskTitle: taskTitle,
@@ -100,41 +135,56 @@ async function createTask(project_id) {
       ],
     };
 
-    console.log(newTask);
+    // console.log(newTask);
     userData.Projects[project_id].tasks.push(newTask);
 
-    await fetch(`http://localhost:3000/users/${curUserId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ Projects: userData.Projects }),
-    });
+    const updateResponse = await fetch(
+      `http://localhost:3000/users/${curUserId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ Projects: userData.Projects }),
+      }
+    );
+    if (!updateResponse.ok) {
+      throw new Error("Network response was not ok");
+    }
+
     const content = `<li class="task-item">
                 <button class="task-button">
                   <p class="task-name">${newTask.taskTitle}</p>
                   <p class="task-due-date">Due on ${newTask.due_date}</p>
-                  
                   <iconify-icon icon="material-symbols:arrow-back-ios-rounded" style="color: black" width="18" height="18" class="arrow-icon"></iconify-icon>
                 </button>
               </li>`;
     const myNewTask = document.createElement("div");
     myNewTask.innerHTML = content;
+
+    let newTaskElement;
     if (newTask.status == "to-do") {
       const ulTo_do = document.getElementById("ulTo-do");
-      ulTo_do.appendChild(myNewTask.firstElementChild);
+      newTaskElement = ulTo_do.appendChild(myNewTask.firstElementChild);
     } else if (newTask.status == "in-progress") {
       const ulDoing = document.getElementById("ulDoing");
-      ulDoing.appendChild(myNewTask.firstElementChild);
+      newTaskElement = ulDoing.appendChild(myNewTask.firstElementChild);
     } else {
       const ulDone = document.getElementById("ulDone");
-      ulDone.appendChild(myNewTask.firstElementChild);
+      newTaskElement = ulDone.appendChild(myNewTask.firstElementChild);
     }
+    if (newTaskElement) {
+      newTaskElement
+        .querySelector(".task-button")
+        .addEventListener("click", handleTaskClick);
+    }
+
     document.getElementById("addTaskForm").reset();
   } catch (error) {
     console.error("Error:", error);
   }
 }
+
 
 async function EditTask() {
   const curUserId = new URLSearchParams(window.location.search).get("id");
@@ -230,6 +280,77 @@ async function deleteTask(task_id, project_id) {
   });
 }
 
+async function renderTasks(proj_Id) {
+  ProjectId = proj_Id;   //To get
+  const response = await fetch(`http://localhost:3000/users/${curUserId}`)
+  const userData = await response.json();
+  document.getElementById("ulTo-do").innerHTML = ""
+  document.getElementById("ulDoing").innerHTML = ""
+  document.getElementById("ulDone").innerHTML = ""
+  userData.Projects[ProjectId].tasks.forEach(element => {
+    const content = `<li class="task-item">
+                <button class="task-button">
+                  <p class="task-name">${element.taskTitle}</p>
+                  <p class="task-due-date">Due on ${element.due_date}</p>
+                  <iconify-icon icon="material-symbols:arrow-back-ios-rounded" style="color: black" width="18" height="18" class="arrow-icon"></iconify-icon>
+                </button>
+              </li>`;
+    const myNewTask = document.createElement("div");
+    myNewTask.innerHTML = content;
+    let newTaskElement;
+    if (element.status == "to-do") {
+      const ulTo_do = document.getElementById("ulTo-do");
+      newTaskElement = ulTo_do.appendChild(myNewTask.firstElementChild);
+    } else if (element.status == "in-progress") {
+      const ulDoing = document.getElementById("ulDoing");
+      newTaskElement = ulDoing.appendChild(myNewTask.firstElementChild);
+    } else {
+      const ulDone = document.getElementById("ulDone");
+      newTaskElement = ulDone.appendChild(myNewTask.firstElementChild);
+    }
+    if (newTaskElement) {
+      newTaskElement
+        .querySelector(".task-button")
+        .addEventListener("click", handleTaskClick);
+    }
+  }
+  )
+  displayProjectDesc()
+}
+
+  async function renderProjects() {
+    const response = await fetch(`http://localhost:3000/users/${curUserId}`)
+    const data = await response.json()
+    let template = ''
+    data.Projects.forEach( project => {
+      template += `
+      <div class="radio-container">
+            <input
+              type="radio"
+              id="${project.id}"
+              name="view-option"
+              value= "${project.id}"
+              class="radio-input"
+              checked
+            />
+            <label for="${project.id}" class="radio-label">
+              <span>${project.title}</span>
+            </label>
+          </div>`
+    })
+    const projectsContainer = document.getElementById("project-display");
+    projectsContainer.innerHTML = template;
+    const radioViewOptions = document.querySelectorAll("input[name='view-option']");
+    radioViewOptions.forEach( radio =>
+      {
+        radio.addEventListener("change", e => {
+          renderTasks(e.target.id)
+        })
+      }
+    )
+    displayProjectDesc()
+  }
+document.getElementById("search-bar").addEventListener()
 async function wipeUserProjects() {
   //idk if this is really needed ngl
 }
@@ -276,13 +397,17 @@ async function getProjectDetails() {
 
 async function displayProjectDesc() {
   // get the current project id
-  let curProjecctId = 1;
+  const radioViewOptions = document.querySelectorAll("input[name='view-option']");
+  let curProjectId = 0;
+  radioViewOptions.forEach( (radio, index) => 
+    {
+      if(radio.checked) curProjectId = index;
+    }
+  )
   const curUserId = new URLSearchParams(window.location.search).get("id");
   const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
   const userData = await response1.json();
-  let project = userData.Projects.find(
-    (project) => project.id == curProjecctId
-  );
+  let project = userData.Projects[curProjectId]
   document.getElementById("project-desc").innerHTML = project.description;
 }
 document.getElementById("signOut").addEventListener("click", signOut);

@@ -72,6 +72,9 @@ body.overflow-hidden {
   position: absolute;
 }
 
+.project-container .hide {
+  display: none;
+}
 
 /* direct sibling */
 .radio-buttons-container .radio-input:checked + .radio-label {
@@ -279,6 +282,27 @@ body.overflow-hidden {
 
 .notification.show {
   top: 0;
+}
+.disable-padding-top{
+padding-top: 0;
+}
+
+.disable-margin-top {
+  margin-top: 0;
+}
+
+.navbar {
+  padding: 1rem;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+}
+
+.add-task-container {
+  margin-top: 2rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content:  space-between;
 }
 
 /* media queries */
