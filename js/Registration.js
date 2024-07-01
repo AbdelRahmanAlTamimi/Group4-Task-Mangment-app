@@ -16,6 +16,7 @@ async function registrationForm() {
     lname: lname,
     email: email,
     password: password,
+    Projects: []
   };
 
   let userExists = await validateUser(data);

@@ -1,7 +1,63 @@
 const curUserId = new URLSearchParams(window.location.search).get("id");
 sessionStorage.setItem("curUserId", curUserId);
-// const taskItems = document.querySelectorAll(".task-item");
+getUserName()
+renderProjects()
 
+document.getElementById("edit-task-btn").addEventListener("click", e =>
+  {
+    document.getElementById("task-edit-done").classList.remove("hidden")
+  
+      var val = document.getElementById("curTaskTitle").innerText;
+      var input=document.createElement("input");
+      input.id = "title-selector"
+      input.value=val;
+      document.getElementById("curTaskTitle").innerText="";
+      document.getElementById("curTaskTitle").appendChild(input);
+      val = document.getElementById("curTaskDesc").innerText;
+      var newinput =document.createElement("input"); 
+      newinput.id = "description-selector"
+      newinput.value = val;
+      document.getElementById("curTaskDesc").innerText="";
+      document.getElementById("curTaskDesc").appendChild(newinput);
+      const due_date = document.getElementById("curTaskDueDate");
+      val = due_date.innerText;
+      let thirdinput = document.createElement("input");
+      thirdinput.id = "date-selector"
+      thirdinput.type = "date";
+      thirdinput.value = val;
+      document.getElementById("curTaskDueDate").innerText = ""
+      document.getElementById("curTaskDueDate").appendChild(thirdinput)
+      let selecter = document.createElement("select")
+      selecter.id = "status-selector"
+      let statuss = document.getElementById("curTaskStatus")
+      let option1 = document.createElement("option")
+      option1.value = "to-do";
+      option1.innerText = "to-do";
+      selecter.appendChild(option1)
+      let option2 = document.createElement("option")
+      option2.value = "in-progress";
+      option2.innerText = "in-progress";
+      selecter.appendChild(option2)
+      let option3 = document.createElement("option")
+      option3.value = "done";
+      option3.innerText = "done";
+      selecter.appendChild(option3);
+      selecter.value = statuss.innerText
+      statuss.innerText = "";
+      statuss.appendChild(selecter)
+  }
+)
+document.getElementById("task-edit-done").addEventListener("click", () =>
+{
+  document.getElementById("task-edit-done").classList.add("hidden");
+  EditTask();
+})
+async function getUserName() 
+{
+  const response = await fetch(`http://localhost:3000/users/${curUserId}`)
+  const data = await response.json()
+  document.getElementById("greeting").innerText = "Welcome " + data.fname
+}
 async function createProject() {
   const curUserId = new URLSearchParams(window.location.search).get("id");
   const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
@@ -25,7 +81,7 @@ async function createProject() {
   });
 
   // Append child to aside that have the project name & three dots button
-  const projectList = document.getElementById("projectList");
+  const projectList = document.getElementById("project-display");
   const projectItem = document.createElement("div");
   projectItem.classList.add("project-item");
 
@@ -66,30 +122,26 @@ async function createProject() {
   });
 }
 
+// const taskButtons = document.querySelectorAll(".task-button");
+// taskButtons.forEach((taskButton) => {
+//   taskButton.addEventListener("click", handleTaskClick);
+// });
 
-// start create task
-  const taskButtons = document.querySelectorAll(".task-button");
-  taskButtons.forEach((taskButton) => {
-    taskButton.addEventListener("click", handleTaskClick);
+let addTaskBtn = document.getElementById("addTask");
+if (addTaskBtn) {
+  addTaskBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    createTask(1);
   });
 
-  let addTaskBtn = document.getElementById("addTask");
-  if (addTaskBtn) {
-    addTaskBtn.addEventListener("click", function (event) {
-      event.preventDefault();
-      createTask(1);
-    });
-
-    addTaskBtn.addEventListener("click", () => {
-      if (activeOverlay) {
-        activeOverlay.classList.add("hide");
-        activeOverlay = null;
-        document.body.classList.remove("overflow-hidden");
-      }
-    });
-  }
-
-
+  addTaskBtn.addEventListener("click", () => {
+    if (activeOverlay) {
+      activeOverlay.classList.add("hide");
+      activeOverlay = null;
+      document.body.classList.remove("overflow-hidden");
+    }
+  });
+}
 function handleTaskClick(id,title,desc,due_date,status) {
   if (viewTaskOverlay) {
     viewTaskOverlay.classList.remove("hide")
@@ -103,15 +155,19 @@ function handleTaskClick(id,title,desc,due_date,status) {
   }
 }
 
-
-
-async function createTask(project_id) {
+async function createTask() {
   const curUserId = sessionStorage.getItem("curUserId");
   if (!curUserId) {
     console.error("User ID is null");
     return;
   }
-
+  const radioViewOptions = document.querySelectorAll("input[name='view-option']");
+  let ProjectId = 0;
+  radioViewOptions.forEach( (radio, index) => 
+    {
+      if(radio.checked) ProjectId = index;
+    }
+  )
   let taskTitle = document.getElementById("name").value;
   let taskDesc = document.getElementById("description").value;
   let taskDueDate = document.getElementById("Duedate").value;
@@ -123,8 +179,9 @@ async function createTask(project_id) {
       throw new Error("Network response was not ok");
     }
     const userData = await response.json();
+    console.log(userData)
     const newTask = {
-      id: userData.Projects[project_id].tasks.length,
+      id: userData.Projects[ProjectId].tasks.length,
       taskTitle: taskTitle,
       description: taskDesc,
       due_date: taskDueDate,
@@ -137,8 +194,8 @@ async function createTask(project_id) {
       ],
     };
 
-    console.log(newTask);
-    userData.Projects[project_id].tasks.push(newTask);
+    // console.log(newTask);
+    userData.Projects[ProjectId].tasks.push(newTask);
 
     const updateResponse = await fetch(
       `http://localhost:3000/users/${curUserId}`,
@@ -161,7 +218,6 @@ async function createTask(project_id) {
                   <iconify-icon icon="material-symbols:arrow-back-ios-rounded" style="color: black" width="18" height="18" class="arrow-icon"></iconify-icon>
                 </button>
               </li>`;
-    
     const myNewTask = document.createElement("div");
     myNewTask.innerHTML = content;
 
@@ -176,13 +232,12 @@ async function createTask(project_id) {
       const ulDone = document.getElementById("ulDone");
       newTaskElement = ulDone.appendChild(myNewTask.firstElementChild);
     }
-
     if (newTaskElement) {
       newTaskElement
         .querySelector(".task-button")
         .addEventListener("click", () => {
-          handleTaskClick(newTask.id,newTask.taskTitle,newTask.description,newTask.due_date,newTask.status);
-        } )
+          handleTaskClick(newTask.id,newTask.taskTitle,newTask.description,newTask.due_date,newTask.status)
+        });
     }
 
     document.getElementById("addTaskForm").reset();
@@ -190,34 +245,69 @@ async function createTask(project_id) {
     console.error("Error:", error);
   }
 }
-//  end create task
-
 
 
 async function EditTask() {
-  const curUserId = sessionStorage.getItem("curUserId");
+  const curUserId = new URLSearchParams(window.location.search).get("id");
   const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
   const userData = await response1.json();
-  let ProjectId = 1; //Get it somehow
-  let taskId = 1; //Get it somehow
-  let editedProperty = "taskTitle"; //get it from poperty selected
-  let newEdit = "edited-Title"; // get this from dom
-
-  if (editedProperty == "status") {
-    if (newEdit == "In Progress") {
-      userData.Projects[ProjectId].tasks[taskId]["progress_date"].push({
-        date: new Date().toLocaleDateString(),
-        status: newEdit,
-      });
-    } else if (newEdit == "Done") {
-      userData.Projects[ProjectId].tasks[taskId]["done_date"].push({
-        date: new Date().toLocaleDateString(),
-        status: newEdit,
-      });
+  const radioViewOptions = document.querySelectorAll("input[name='view-option']");
+  let curProjectId = 0;
+  radioViewOptions.forEach( (radio, index) => 
+    {
+      if(radio.checked) curProjectId = index;
     }
+  )
+  let ProjectId = curProjectId; //Get it somehow
+  let taskId = document.getElementById("curTaskId").innerHTML
+  var currentTask = userData.Projects[ProjectId].tasks[taskId]
+  //Get it somehow
+  // let editedProperty = "taskTitle"; //get it from poperty selected
+  // let newEdit = "edited-Title"; // get this from dom
+  // if (editedProperty == "status") {
+    //   if (newEdit == "In Progress") {
+      //     userData.Projects[ProjectId].tasks[taskId]["progress_date"].push({
+        //       date: new Date().toLocaleDateString(),
+        //       status: newEdit,
+        //     });
+        //   } else if (newEdit == "Done") {
+          //     userData.Projects[ProjectId].tasks[taskId]["done_date"].push({
+            //       date: new Date().toLocaleDateString(),
+            //       status: newEdit,
+            //     });
+            //   }
+            // }
+            let newTask = {}
+  if(document.getElementById("status-selector").value == currentTask.status) {
+    newTask = {
+      id: currentTask.id,
+      taskTitle: document.getElementById("title-selector").value,
+      description: document.getElementById("description-selector").value,
+      due_date: document.getElementById("date-selector").value,
+      status: document.getElementById("status-selector").value,
+      history: [
+        {
+          status: document.getElementById("status-selector").value,
+          date: new Date().toLocaleDateString(),
+        },
+      ],
+    };
+  }
+  else {
+    newTask = {
+      id: currentTask.id,
+      taskTitle: document.getElementById("title-selector").value,
+      description: document.getElementById("description-selector").value,
+      due_date: document.getElementById("date-selector").value,
+      status: document.getElementById("status-selector").value,
+      history: currentTask.history.push({
+        status: document.getElementById("status-selector").value,
+        date: new Date().toLocaleDateString(),
+      })
+    };
   }
 
-  userData.Projects[ProjectId].tasks[taskId][editedProperty] = newEdit;
+  userData.Projects[ProjectId].tasks[taskId] = newTask;
   // console.log(userData.Projects[id].tasks)
   fetch(`http://localhost:3000/users/${curUserId}`, {
     method: "PATCH",
@@ -271,7 +361,7 @@ async function deleteTask(task_id, project_id) {
   const userid = new URLSearchParams(location.search).get("id");
   const getlastdata = await fetch(`http://localhost:3000/users/${userid}`);
   const returntojson = await getlastdata.json();
-  const ProjectID = project_id; //getfrom dom
+  const ProjectID = project_id; //get from dom
   const taskesindex = task_id; //get from dom
   returntojson.Projects[ProjectID].tasks = returntojson.Projects[
     ProjectID
@@ -288,7 +378,86 @@ async function deleteTask(task_id, project_id) {
   });
 }
 
+async function renderTasks(proj_Id) {
+  ProjectId = proj_Id;   //To get
+  const response = await fetch(`http://localhost:3000/users/${curUserId}`)
+  const userData = await response.json();
+  document.getElementById("ulTo-do").innerHTML = ""
+  document.getElementById("ulDoing").innerHTML = ""
+  document.getElementById("ulDone").innerHTML = ""
+  userData.Projects[ProjectId].tasks.forEach(element => {
+    const content = `<li class="task-item">
+                <button class="task-button">
+                  <p class="task-name">${element.taskTitle}</p>
+                  <p class="task-due-date">Due on ${element.due_date}</p>
+                  <iconify-icon icon="material-symbols:arrow-back-ios-rounded" style="color: black" width="18" height="18" class="arrow-icon"></iconify-icon>
+                </button>
+              </li>`;
+    const myNewTask = document.createElement("div");
+    myNewTask.innerHTML = content;
+    let newTaskElement;
+    if (element.status == "to-do") {
+      const ulTo_do = document.getElementById("ulTo-do");
+      newTaskElement = ulTo_do.appendChild(myNewTask.firstElementChild);
+    } else if (element.status == "in-progress") {
+      const ulDoing = document.getElementById("ulDoing");
+      newTaskElement = ulDoing.appendChild(myNewTask.firstElementChild);
+    } else {
+      const ulDone = document.getElementById("ulDone");
+      newTaskElement = ulDone.appendChild(myNewTask.firstElementChild);
+    }
+    if (newTaskElement) {
+      newTaskElement
+        .querySelector(".task-button")
+        .addEventListener("click", () => {
+          handleTaskClick(element.id,element.taskTitle,element.description,element.due_date,element.status)
+        });
+    }
+  }
+  )
+  displayProjectDesc()
+}
 
+  async function renderProjects() {
+    const response = await fetch(`http://localhost:3000/users/${curUserId}`)
+    const data = await response.json()
+    let template = ''
+    data.Projects.forEach( project => {
+      template += `
+      <div class="radio-container">
+            <input
+              type="radio"
+              id="${project.id}"
+              name="view-option"
+              value= "${project.id}"
+              class="radio-input"
+              checked
+            />
+            <label for="${project.id}" class="radio-label">
+              <span>${project.title}</span>
+            </label>
+          </div>`
+    })
+    const projectsContainer = document.getElementById("project-display");
+    projectsContainer.innerHTML = template;
+    const radioViewOptions = document.querySelectorAll("input[name='view-option']");
+    radioViewOptions.forEach( radio =>
+      {
+        radio.addEventListener("change", e => {
+          renderTasks(e.target.id)
+        })
+      }
+    )
+    displayProjectDesc()
+  }
+// document.getElementById("search-bar").addEventListener('keyup', e => 
+//   {
+
+//   }
+// )
+async function wipeUserProjects() {
+  //idk if this is really needed ngl
+}
 
 // Rasha's work:
 
@@ -332,13 +501,17 @@ async function getProjectDetails() {
 
 async function displayProjectDesc() {
   // get the current project id
-  let curProjecctId = 1;
+  const radioViewOptions = document.querySelectorAll("input[name='view-option']");
+  let curProjectId = 0;
+  radioViewOptions.forEach( (radio, index) => 
+    {
+      if(radio.checked) curProjectId = index;
+    }
+  )
   const curUserId = new URLSearchParams(window.location.search).get("id");
   const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
   const userData = await response1.json();
-  let project = userData.Projects.find(
-    (project) => project.id == curProjecctId
-  );
+  let project = userData.Projects[curProjectId]
   document.getElementById("project-desc").innerHTML = project.description;
 }
 document.getElementById("signOut").addEventListener("click", signOut);

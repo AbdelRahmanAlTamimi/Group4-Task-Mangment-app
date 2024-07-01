@@ -2,7 +2,9 @@ body.overflow-hidden {
   /* disable scrolling only when overlay is open */
   overflow: hidden;
 }
-
+.hidden {
+  visibility: hidden;
+}
 .content-container {
   padding-block: var(--space-32);
 }
@@ -22,6 +24,9 @@ body.overflow-hidden {
   font-weight: 600;
 }
 
+#add-img {
+  filter: brightness(0) saturate(100%);
+}
 /* radio buttons for view options */
 .radio-buttons-container {
   border-top: 2px solid var(--black);
@@ -46,9 +51,22 @@ body.overflow-hidden {
   font-weight: 500;
   font-size: var(--font-size-14);
   padding-block: var(--space-16);
+  height: 100%;
   cursor: pointer;
 }
-
+.radio-label {
+  text-align: center;
+}
+.radio-label span {
+  width: 100%;
+  overflow: hidden;
+}
+#add-project-container {
+  align-items: center;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+}
 .radio-input {
   /* hide */
   appearance: none;
@@ -56,6 +74,9 @@ body.overflow-hidden {
   position: absolute;
 }
 
+.project-container .hide {
+  display: none;
+}
 
 /* direct sibling */
 .radio-buttons-container .radio-input:checked + .radio-label {
@@ -264,6 +285,28 @@ body.overflow-hidden {
 .notification.show {
   top: 0;
 }
+.disable-padding-top{
+padding-top: 0;
+}
+
+.disable-margin-top {
+  margin-top: 0;
+}
+
+.navbar {
+  padding: 1rem;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+}
+
+.add-task-container {
+  margin-top: 2rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content:  space-between;
+}
+
 
 /* media queries */
 @media (min-width: 768px) {
@@ -300,15 +343,3 @@ select{
   width: 100%;
 
 }
-
-.hidden {
-  display: none;
-}
-.editInput{
-  background-color: var(--green);
-  border-color: transparent;
-}
-
-
-
-
