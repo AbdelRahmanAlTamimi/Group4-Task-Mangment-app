@@ -13,7 +13,7 @@ const deleteTaskCTA = document.getElementById("delete-task-cta");
 const notification = document.getElementById("notification");
 // the current active overlay
 let activeOverlay = null;
-
+let activeProject = listView;
 //** event listeners **//
 
 // radio buttons for view option
@@ -21,15 +21,19 @@ radioViewOptions.forEach((radioButton) => {
   radioButton.addEventListener("change", (event) => {
     const eventTarget = event.target;
     const viewOption = eventTarget.value;
-
+    // console.log(eventTarget)
     switch (viewOption) {
       case "list":
-        boardView.classList.add("hide");
-        listView.classList.remove("hide");
+        activeProject.classList.add("hide");
+        // console.log(viewOption)
+        activeProject = listView
+        activeProject.classList.remove("hide");
         break;
-      case "board":
-        listView.classList.add("hide");
-        boardView.classList.remove("hide");
+        case "board":
+          // console.log(viewOption)
+          activeProject.classList.add("hide");
+          activeProject = boardView
+          activeProject.classList.remove("hide");
         break;
     }
   });

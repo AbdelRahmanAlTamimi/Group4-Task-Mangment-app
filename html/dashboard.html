@@ -34,6 +34,7 @@
       <div class="max-width-container">
         <div class="header flex items-center justify-between">
           <h1 class="title">My tasks</h1>
+          <div><h1>Welcome Fname</h1></div>
           <div class="buttons-container">
             <button
               id="add-task-cta"
@@ -48,6 +49,19 @@
       <!-- radio buttons -->
       <div class="radio-buttons-container">
         <div class="max-width-container flex">
+          <div class="radio-container" id="add-project-container">
+            <button
+              type="button"
+              id="add-Project"
+              name="add-Project"
+              value="list"
+              class="radio-input"
+            >
+            
+              <!-- list-bulleted -->
+              <img src="../img/add.png" alt="" id="add-img">
+            
+          </div>
           <div class="radio-container">
             <input
               type="radio"
@@ -59,13 +73,13 @@
             />
             <label for="list" class="radio-label">
               <!-- list-bulleted -->
-              <iconify-icon
+              <!-- <iconify-icon
                 icon="material-symbols:format-list-bulleted-rounded"
                 style="color: black"
                 width="24"
                 height="24"
-              ></iconify-icon>
-              <span>List</span>
+              ></iconify-icon> -->
+              <span>Project 1 loremsadfdasdsadfasdfasdf</span>
             </label>
           </div>
           <div class="radio-container">
@@ -78,13 +92,13 @@
             />
             <label for="board" class="radio-label">
               <!-- grid -->
-              <iconify-icon
+              <!-- <iconify-icon
                 icon="ic:round-grid-view"
                 style="color: black"
                 width="24"
                 height="24"
-              ></iconify-icon>
-              <span>Board</span>
+              ></iconify-icon> -->
+              <span>Project 2</span>
             </label>
           </div>
         </div>
@@ -113,6 +127,7 @@
                   ></iconify-icon>
                 </button>
               </li>
+              
               <li class="task-item">
                 <button class="task-button">
                   <p class="task-name">Design UI</p>
@@ -245,7 +260,8 @@
           </div>
         </div>
         <!-- board view -->
-        <div id="board-view" class="board-view hide">
+         <!-- In render we replace board view ID with class name and select them thru indexes -->
+        <div id="board-view" class="board-view hide"> 
           <!-- list -->
           <div>
             <h2 class="list-header">
@@ -623,6 +639,14 @@
           </button>
         </div>
       </div>
+    </div>
+
+
+    <div id="project-quickview">
+      <div class="flex"><div class="circle pink-background"></div>
+      : X</div>
+      <div class="flex"><div class="circle blue-background"></div>: Y</div>
+      <div class="flex"><div class="circle green-background"></div>: Z</div>
     </div>
     <!-- import IconifyIcon web component -->
     <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>

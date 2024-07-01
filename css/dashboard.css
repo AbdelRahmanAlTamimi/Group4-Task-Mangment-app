@@ -22,6 +22,9 @@ body.overflow-hidden {
   font-weight: 600;
 }
 
+#add-img {
+  filter: brightness(0) saturate(100%);
+}
 /* radio buttons for view options */
 .radio-buttons-container {
   border-top: 2px solid var(--black);
@@ -46,9 +49,22 @@ body.overflow-hidden {
   font-weight: 500;
   font-size: var(--font-size-14);
   padding-block: var(--space-16);
+  height: 100%;
   cursor: pointer;
 }
-
+.radio-label {
+  text-align: center;
+}
+.radio-label span {
+  width: 100%;
+  overflow: hidden;
+}
+#add-project-container {
+  align-items: center;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+}
 .radio-input {
   /* hide */
   appearance: none;
