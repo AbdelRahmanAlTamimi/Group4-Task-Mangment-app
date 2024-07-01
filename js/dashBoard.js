@@ -2,6 +2,53 @@ const curUserId = new URLSearchParams(window.location.search).get("id");
 sessionStorage.setItem("curUserId", curUserId);
 getUserName()
 renderProjects()
+
+document.getElementById("edit-task-btn").addEventListener("click", e =>
+  {
+    document.getElementById("task-edit-done").classList.remove("hidden")
+  
+      var val = document.getElementById("curTaskTitle").innerText;
+      var input=document.createElement("input");
+      input.id = "title-selector"
+      input.value=val;
+      document.getElementById("curTaskTitle").innerText="";
+      document.getElementById("curTaskTitle").appendChild(input);
+      val = document.getElementById("curTaskDesc").innerText;
+      var newinput =document.createElement("input"); 
+      newinput.id = "description-selector"
+      newinput.value = val;
+      document.getElementById("curTaskDesc").innerText="";
+      document.getElementById("curTaskDesc").appendChild(newinput);
+      const due_date = document.getElementById("curTaskDueDate");
+      val = due_date.innerText;
+      let thirdinput = document.createElement("input");
+      thirdinput.id = "date-selector"
+      thirdinput.type = "date";
+      thirdinput.value = val;
+      document.getElementById("curTaskDueDate").innerText = ""
+      document.getElementById("curTaskDueDate").appendChild(thirdinput)
+      let selecter = document.createElement("select")
+      selecter.id = "status-selector"
+      let statuss = document.getElementById("curTaskStatus")
+      let option1 = document.createElement("option")
+      option1.value = "to-do";
+      option1.innerText = "to-do";
+      selecter.appendChild(option1)
+      let option2 = document.createElement("option")
+      option2.value = "in-progress";
+      option2.innerText = "in-progress";
+      selecter.appendChild(option2)
+      let option3 = document.createElement("option")
+      option3.value = "done";
+      option3.innerText = "done";
+      selecter.appendChild(option3);
+      selecter.value = statuss.innerText
+      statuss.innerText = "";
+      statuss.appendChild(selecter)
+
+
+  }
+)
 async function getUserName() 
 {
   const response = await fetch(`http://localhost:3000/users/${curUserId}`)
@@ -72,10 +119,10 @@ async function createProject() {
   });
 }
 
-const taskButtons = document.querySelectorAll(".task-button");
-taskButtons.forEach((taskButton) => {
-  taskButton.addEventListener("click", handleTaskClick);
-});
+// const taskButtons = document.querySelectorAll(".task-button");
+// taskButtons.forEach((taskButton) => {
+//   taskButton.addEventListener("click", handleTaskClick);
+// });
 
 let addTaskBtn = document.getElementById("addTask");
 if (addTaskBtn) {
@@ -92,23 +139,32 @@ if (addTaskBtn) {
     }
   });
 }
-
- function handleTaskClick() {
+function handleTaskClick(id,title,desc,due_date,status) {
   if (viewTaskOverlay) {
-    viewTaskOverlay.classList.remove("hide");
-    document.getElementById
+    viewTaskOverlay.classList.remove("hide")
+    document.getElementById("curTaskId").textContent=id;
+    document.getElementById("curTaskTitle").textContent = title;
+    document.getElementById("curTaskDesc").textContent = desc;
+    document.getElementById("curTaskDueDate").textContent=due_date;
+    document.getElementById("curTaskStatus").textContent=status;
     activeOverlay = viewTaskOverlay;
     document.body.classList.add("overflow-hidden");
   }
 }
 
-async function createTask(project_id) {
+async function createTask() {
   const curUserId = sessionStorage.getItem("curUserId");
   if (!curUserId) {
     console.error("User ID is null");
     return;
   }
-
+  const radioViewOptions = document.querySelectorAll("input[name='view-option']");
+  let ProjectId = 0;
+  radioViewOptions.forEach( (radio, index) => 
+    {
+      if(radio.checked) ProjectId = index;
+    }
+  )
   let taskTitle = document.getElementById("name").value;
   let taskDesc = document.getElementById("description").value;
   let taskDueDate = document.getElementById("Duedate").value;
@@ -122,7 +178,7 @@ async function createTask(project_id) {
     const userData = await response.json();
     console.log(userData)
     const newTask = {
-      id: userData.Projects[project_id].tasks.length,
+      id: userData.Projects[ProjectId].tasks.length,
       taskTitle: taskTitle,
       description: taskDesc,
       due_date: taskDueDate,
@@ -136,7 +192,7 @@ async function createTask(project_id) {
     };
 
     // console.log(newTask);
-    userData.Projects[project_id].tasks.push(newTask);
+    userData.Projects[ProjectId].tasks.push(newTask);
 
     const updateResponse = await fetch(
       `http://localhost:3000/users/${curUserId}`,
@@ -176,7 +232,9 @@ async function createTask(project_id) {
     if (newTaskElement) {
       newTaskElement
         .querySelector(".task-button")
-        .addEventListener("click", handleTaskClick);
+        .addEventListener("click", () => {
+          handleTaskClick(newTask.id,newTask.taskTitle,newTask.description,newTask.due_date,newTask.status)
+        });
     }
 
     document.getElementById("addTaskForm").reset();
@@ -190,26 +248,63 @@ async function EditTask() {
   const curUserId = new URLSearchParams(window.location.search).get("id");
   const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
   const userData = await response1.json();
-  let ProjectId = 1; //Get it somehow
-  let taskId = 1; //Get it somehow
-  let editedProperty = "taskTitle"; //get it from poperty selected
-  let newEdit = "edited-Title"; // get this from dom
-
-  if (editedProperty == "status") {
-    if (newEdit == "In Progress") {
-      userData.Projects[ProjectId].tasks[taskId]["progress_date"].push({
-        date: new Date().toLocaleDateString(),
-        status: newEdit,
-      });
-    } else if (newEdit == "Done") {
-      userData.Projects[ProjectId].tasks[taskId]["done_date"].push({
-        date: new Date().toLocaleDateString(),
-        status: newEdit,
-      });
+  const radioViewOptions = document.querySelectorAll("input[name='view-option']");
+  let currentTask = userData.Projects[ProjectId].tasks[taskId]
+  let curProjectId = 0;
+  radioViewOptions.forEach( (radio, index) => 
+    {
+      if(radio.checked) curProjectId = index;
     }
+  )
+  let ProjectId = curProjectId; //Get it somehow
+  let taskId = document.getElementById("curTaskId").innerText
+  //Get it somehow
+  // let editedProperty = "taskTitle"; //get it from poperty selected
+  // let newEdit = "edited-Title"; // get this from dom
+  // if (editedProperty == "status") {
+    //   if (newEdit == "In Progress") {
+      //     userData.Projects[ProjectId].tasks[taskId]["progress_date"].push({
+        //       date: new Date().toLocaleDateString(),
+        //       status: newEdit,
+        //     });
+        //   } else if (newEdit == "Done") {
+          //     userData.Projects[ProjectId].tasks[taskId]["done_date"].push({
+            //       date: new Date().toLocaleDateString(),
+            //       status: newEdit,
+            //     });
+            //   }
+            // }
+            let newTask = {}
+  if(document.getElementById("status-selector").value == currentTask.status) {
+    newTask = {
+      id: currentTask.id,
+      taskTitle: document.getElementById("title-selector").value,
+      description: document.getElementById("description-selector").value,
+      due_date: document.getElementById("date-selector").value,
+      status: document.getElementById("status-selector").value,
+      history: [
+        {
+          status: taskStatus,
+          date: new Date().toLocaleDateString(),
+        },
+      ],
+    };
+  }
+  else {
+    newTask = {
+      id: currentTask.id,
+      taskTitle: document.getElementById("title-selector").value,
+      description: document.getElementById("description-selector").value,
+      due_date: document.getElementById("date-selector").value,
+      status: document.getElementById("status-selector").value,
+      history: currentTask.history.push({
+        status: document.getElementById("status-selector").value,
+        date: new Date().toLocaleDateString(),
+      })
+    };
   }
 
-  userData.Projects[ProjectId].tasks[taskId][editedProperty] = newEdit;
+  userData.Projects[ProjectId].tasks[taskId] = newTask;
   // console.log(userData.Projects[id].tasks)
   fetch(`http://localhost:3000/users/${curUserId}`, {
     method: "PATCH",
@@ -263,7 +358,7 @@ async function deleteTask(task_id, project_id) {
   const userid = new URLSearchParams(location.search).get("id");
   const getlastdata = await fetch(`http://localhost:3000/users/${userid}`);
   const returntojson = await getlastdata.json();
-  const ProjectID = project_id; //getfrom dom
+  const ProjectID = project_id; //get from dom
   const taskesindex = task_id; //get from dom
   returntojson.Projects[ProjectID].tasks = returntojson.Projects[
     ProjectID
@@ -311,7 +406,9 @@ async function renderTasks(proj_Id) {
     if (newTaskElement) {
       newTaskElement
         .querySelector(".task-button")
-        .addEventListener("click", handleTaskClick);
+        .addEventListener("click", () => {
+          handleTaskClick(element.id,element.taskTitle,element.description,element.due_date,element.status)
+        });
     }
   }
   )
@@ -350,7 +447,11 @@ async function renderTasks(proj_Id) {
     )
     displayProjectDesc()
   }
-document.getElementById("search-bar").addEventListener()
+// document.getElementById("search-bar").addEventListener('keyup', e => 
+//   {
+
+//   }
+// )
 async function wipeUserProjects() {
   //idk if this is really needed ngl
 }

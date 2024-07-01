@@ -18,7 +18,7 @@
               "taskTitle": "testt",
               "description": "testd",
               "due_date": "test22",
-              "status": "testok",
+              "status": "done",
               "create_date": "testcreate"
             },
             {
@@ -170,7 +170,7 @@
             {
               "id": 13,
               "taskTitle": "test 10",
-              "description": "",
+              "description": "test-description",
               "due_date": "2024-07-10",
               "status": "to-do",
               "history": [
@@ -357,7 +357,21 @@
           "title": "hi",
           "description": "",
           "create_date": "6/30/2024",
-          "tasks": []
+          "tasks": [
+            {
+              "id": 0,
+              "taskTitle": "xvxfgd",
+              "description": "hiii",
+              "due_date": "2024-07-31",
+              "status": "done",
+              "history": [
+                {
+                  "status": "done",
+                  "date": "7/1/2024"
+                }
+              ]
+            }
+          ]
         }
       ]
     },

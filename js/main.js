@@ -101,7 +101,7 @@ deleteTaskCTA.addEventListener("click", () => {
 });
 
 //status drop down 
-taskStatusBtn.addEventListener("click", (e) =>
-{
-  statusDropdown2.classList.toggle("hide");
-})
+// taskStatusBtn.addEventListener("click", (e) =>
+// {
+//   statusDropdown2.classList.toggle("hide");
+// })

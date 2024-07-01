@@ -266,21 +266,23 @@
             height="26"
           ></iconify-icon>
         </button>
+        <!-- Close Button -->
+
+        <p id="curTaskId" class="hidden"></p>
         <h1 class="header no-margin">Name</h1>
-        <p class="value" id="currentTaskTitle">some long task name</p>
+        <p class="value task-info" id="curTaskTitle"></p>
         <h1 class="header">Description</h1>
-        <p class="value" id="currentTaskDesc">
-          some long task namesome long task namesome long task name
-        </p>
+        <p class="value task-info" id="curTaskDesc"></p>
         <div class="flex items-center">
-          <h1 class="header min-width">Due date</h1>
-          <p class="value">January 7, 2020</p>
+          <h1 class="header">Due date</h1> <br>
+          <p class="value" id="curTaskDueDate"></p>
         </div>
         <div class="flex items-center">
           <h1 class="header min-width">Status</h1>
-          <p class="value status-value" id="status-dropdown-task-overview">
-            <span class="circle blue-background"></span><span>Doing</span>  <iconify-icon icon="material-symbols:arrow-back-ios-rounded" style="color: black; transform: rotate(270deg);" width="18" height="18" class="arrow-icon"></iconify-icon>
+          <p class="value status-value" id="curTaskStatus">
+            <span class="circle blue-background"></span><span></span>
           </p>
+        
         </div>
         <div id="horros">
           <ul
@@ -328,7 +330,7 @@
         <div class="control-buttons-container">
           <!-- edit button -->
           <button
-            class="button circle-button pink-background flex justify-center items-center"
+            class="button circle-button pink-background flex justify-center items-center" id="edit-task-btn"
           >
             <iconify-icon
               icon="material-symbols:edit-rounded"
@@ -354,6 +356,11 @@
           id="task-history-cta"
           class="button circle-button pink-background flex justify-center items-center">
         <img src="../img/historyy.png" alt="">
+        </button>
+        <button
+          id="task-edit-done"
+          class="button circle-button blue-background flex justify-center items-center hidden">
+        <img src="../img/check.png" alt="">
         </button>
         </div>
       </div>

@@ -2,7 +2,9 @@ body.overflow-hidden {
   /* disable scrolling only when overlay is open */
   overflow: hidden;
 }
-
+.hidden {
+  visibility: hidden;
+}
 .content-container {
   padding-block: var(--space-32);
 }
@@ -304,6 +306,7 @@ padding-top: 0;
   align-items: flex-end;
   justify-content:  space-between;
 }
+
 
 /* media queries */
 @media (min-width: 768px) {
