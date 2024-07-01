@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <button class="show-modal" aria-haspopup="true">create new project <img src="add.png" alt=""></button>
+
+    <div class="mask-modal" role="dialog"></div>
+    <div class="modal" role="alert">
+        <div class="insidee"> 
+     <input type="text" placeholder="project title" class="prjct">
+     <textarea name="dis" id="dis" placeholder="Project discripton"></textarea>
+     
+      <button class="add-btn">Add</button>
+    </div>
+      <button class="close-modal" role="button">X</button>
+      
+    </div>
+    <script src="pop.js"></script>
+</body>
+</html>
