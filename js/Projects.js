@@ -109,7 +109,6 @@ async function deletproject(project_id){
           },
         body : JSON.stringify(returntojson) 
     })
-    // renderprojects()
 }
 
 async function deleteTask(task_id, project_id){
