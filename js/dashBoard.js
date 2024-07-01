@@ -45,10 +45,13 @@ document.getElementById("edit-task-btn").addEventListener("click", e =>
       selecter.value = statuss.innerText
       statuss.innerText = "";
       statuss.appendChild(selecter)
-
-
   }
 )
+document.getElementById("task-edit-done").addEventListener("click", () =>
+{
+  document.getElementById("task-edit-done").classList.add("hidden");
+  EditTask();
+})
 async function getUserName() 
 {
   const response = await fetch(`http://localhost:3000/users/${curUserId}`)
@@ -249,7 +252,6 @@ async function EditTask() {
   const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
   const userData = await response1.json();
   const radioViewOptions = document.querySelectorAll("input[name='view-option']");
-  let currentTask = userData.Projects[ProjectId].tasks[taskId]
   let curProjectId = 0;
   radioViewOptions.forEach( (radio, index) => 
     {
@@ -257,7 +259,8 @@ async function EditTask() {
     }
   )
   let ProjectId = curProjectId; //Get it somehow
-  let taskId = document.getElementById("curTaskId").innerText
+  let taskId = document.getElementById("curTaskId").innerHTML
+  var currentTask = userData.Projects[ProjectId].tasks[taskId]
   //Get it somehow
   // let editedProperty = "taskTitle"; //get it from poperty selected
   // let newEdit = "edited-Title"; // get this from dom
@@ -284,7 +287,7 @@ async function EditTask() {
       status: document.getElementById("status-selector").value,
       history: [
         {
-          status: taskStatus,
+          status: document.getElementById("status-selector").value,
           date: new Date().toLocaleDateString(),
         },
       ],
