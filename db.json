@@ -14,14 +14,6 @@
           "create_date": "10/2",
           "tasks": [
             {
-              "id": 0,
-              "taskTitle": "testt",
-              "description": "testd",
-              "due_date": "test22",
-              "status": "done",
-              "create_date": "testcreate"
-            },
-            {
               "id": 1,
               "taskTitle": "testt",
               "description": "testd",
@@ -340,20 +332,6 @@
         },
         {
           "id": 1,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 2,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": []
-        },
-        {
-          "id": 3,
           "title": "hi",
           "description": "",
           "create_date": "6/30/2024",

@@ -352,6 +352,7 @@ async function deletproject(project_id) {
     },
     body: JSON.stringify(returntojson),
   });
+  renderProjects()
 }
 
 async function deleteTask(task_id, project_id) {
