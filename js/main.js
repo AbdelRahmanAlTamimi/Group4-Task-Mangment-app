@@ -89,15 +89,7 @@ taskItems.forEach((task) => {
 
 // delete a task
 deleteTaskCTA.addEventListener("click", () => {
-  activeOverlay.classList.add("hide");
-  activeOverlay = null;
-  // reenable scrolling
-  document.body.classList.remove("overflow-hidden");
-  // show notification & hide it after a while
-  notification.classList.add("show");
-  setTimeout(() => {
-    notification.classList.remove("show");
-  }, 3000);
+  
 });
 
 //status drop down 
