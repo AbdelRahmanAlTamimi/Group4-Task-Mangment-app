@@ -341,5 +341,20 @@ select{
   border: 2px solid black;
   border-radius: var(--radius-8);
   width: 100%;
+  padding: 0 0.5rem;
+}
+.Project-details {
+  display: flex;
+  column-gap: 1.2rem;
+}
 
+.bar-under-projects {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.2rem;
+}
+
+#project-desc {
+  width: 50vw;
 }

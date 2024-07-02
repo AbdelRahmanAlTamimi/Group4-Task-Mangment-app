@@ -247,6 +247,10 @@ body {
   background-color: #dddddd;
   position: absolute;
   visibility: hidden;
+  padding: 4px;
+  row-gap: 3px;
+  display: flex;
+  flex-direction: column;
 }
 /* media queries */
 @media (min-width: 768px) {

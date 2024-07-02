@@ -27,15 +27,14 @@ radioViewOptions.forEach((radioButton) => {
   radioButton.parentNode.addEventListener("mouseenter",async (e) =>
     { 
       // quickview.style.visibility = "visible"
-      await setTimeout(() => {
+      setTimeout(() => {
         quickview.style.visibility = "visible"
       },1000);
-      quickview.style.top = e.clientY + "px"
-      quickview.style.left = e.clientX + "px"
-      quickview.style.visibility = "visible"
+      quickview.style.top = (e.clientY + 10) + "px"
+      quickview.style.left = e.clientX + "px" 
       await setTimeout(() => {
         quickview.style.visibility = "hidden"
-      },3000);
+      },5000);
 
     })
 
@@ -93,6 +92,12 @@ deleteTaskCTA.addEventListener("click", () => {
     document.body.classList.remove("overflow-hidden");
 });
 
+document.getElementById("task-edit-done").addEventListener("click", () =>
+{
+  activeOverlay.classList.add("hide");
+    activeOverlay = null;
+    document.body.classList.remove("overflow-hidden");
+} )
 //status drop down 
 // taskStatusBtn.addEventListener("click", (e) =>
 // {

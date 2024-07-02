@@ -56,11 +56,36 @@
         list-bulleted
         <img src="../img/add.png" alt="" id="add-img">
         </button> -->
+        <div class="max-width-container bar-under-projects">
+          <span id="project-desc">Title</span>
+          <div class="Project-details">
+            <button
+                class="button circle-button pink-background flex justify-center items-center" id="edit-project-btn"
+              >
+                <iconify-icon
+                  icon="material-symbols:edit-rounded"
+                  style="color: black"
+                  width="24"
+                  height="24"
+                ></iconify-icon>
+              </button>
+              <button
+              id="delete-project-btn"
+              class="button circle-button pink-background flex justify-center items-center"
+            >
+              <iconify-icon
+                icon="ic:round-delete"
+                style="color: black"
+                width="24"
+                height="24"
+              ></iconify-icon>
+            </button>
+          </div>
+        </div>
         <div class="max-width-container add-task-container">
           <button id="add-task-cta"class="button regular-button blue-background show-modal"aria-haspopup="true">
             Add task
           </button>
-          <span id="project-desc">Title</span>
           <div>
             <label for="search-bar">Search:</label>
             <input type="text" id="search-bar">
@@ -241,10 +266,10 @@
         <p class="value task-info" id="curTaskTitle"></p>
         <h1 class="header">Description</h1>
         <p class="value task-info" id="curTaskDesc"></p>
-        <div class="flex items-center">
-          <h1 class="header">Due date</h1> <br>
+        <!-- <div class="flex items-center"> -->
+          <h1 class="header">Due date</h1>
           <p class="value" id="curTaskDueDate"></p>
-        </div>
+        <!-- </div> -->
         <div class="flex items-center">
           <h1 class="header min-width">Status</h1>
           <p class="value" id="curTaskStatus">
@@ -340,7 +365,7 @@
       <div class="flex quickview-line" id="progress-counter"><div class="circle blue-background"></div>: Y</div>
       <div class="flex quickview-line" id="done-counter"><div class="circle green-background"></div>: Z</div>
     </div>
-
+    
     
     <!-- import IconifyIcon web component -->
     <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>

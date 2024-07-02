@@ -16,7 +16,22 @@ const deleteTaskBtn = document.getElementById("delete-task-cta")
 deleteTaskBtn.addEventListener("click", (e) => {
   e.preventDefault()
   deleteTask();
-  
+})
+const deleteProjectBtn = document.getElementById("delete-project-btn")
+deleteProjectBtn.addEventListener("click", () => 
+{
+  const radioViewOptions = document.querySelectorAll("input[name='view-option']");
+  let ProjectId = 0;
+  radioViewOptions.forEach( (radio, index) => 
+    {
+      if(radio.checked) ProjectId = index;
+    }
+  )
+  if(confirm("Are you sure You want to delete"))
+    {
+      deleteProject(ProjectId);
+      renderProjects()
+    }
 })
 
 async function deleteProject(project_id){
@@ -118,6 +133,7 @@ async function createProject()
           },
         body : JSON.stringify(userData)
     })
+    renderProjects()
 }
   // Append child to aside that have the project name & three dots button
 
@@ -364,7 +380,7 @@ async function deleteTask() {
         },
       body : JSON.stringify(returntojson) 
   })
-
+  renderTasks(curProjectId);
 }
 
 async function renderTasks(proj_Id) {
@@ -443,21 +459,21 @@ async function renderTasks(proj_Id) {
             const projectsContainer = document.getElementById("project-display");
             container.addEventListener("mouseenter", async (e) => {
               // quickview.style.visibility = "visible"
-              document.getElementById("to-do-counter").innerHTML = `<div class="circle pink-background"></div>: ${todoCounter}`
-              document.getElementById("progress-counter").innerHTML = `<div class="circle blue-background"></div>: ${doingCounter}`
-              document.getElementById("done-counter").innerHTML = `<div class="circle green-background"></div>: ${doneCounter}`
+              document.getElementById("to-do-counter").innerHTML = `<div class="circle pink-background"></div> : ${todoCounter}`
+              document.getElementById("progress-counter").innerHTML = `<div class="circle blue-background"></div> : ${doingCounter}`
+              document.getElementById("done-counter").innerHTML = `<div class="circle green-background"></div> : ${doneCounter}`
               
-              quickview.style.top = e.clientY + "px"
-              quickview.style.left = e.clientX + "px"
+              quickview.style.top = (e.clientY + 10) + "px"
+              quickview.style.left = (e.clientX + 4) + "px"
               quickview.style.visibility = "visible"
               await setTimeout(() => {
                 quickview.style.visibility = "hidden"
               },1400);
             })
-            container.addEventListener("contextmenu", (e) => {
-              e.preventDefault();
-              deleteProject(project.id);
-            })
+            // container.addEventListener("contextmenu", (e) => {
+            //   e.preventDefault();
+            //   deleteProject(project.id);
+            // })
             projectsContainer.appendChild(container)
           }
     )
@@ -472,6 +488,14 @@ async function renderTasks(proj_Id) {
     )
       
     displayProjectDesc()
+    const projects = document.querySelectorAll("input[name='view-option']");
+  let curProjectId = 0;
+  projects.forEach( (radio, index) => 
+    {
+      if(radio.checked) curProjectId = index;
+    }
+  )
+    renderTasks(curProjectId)
   }
 // document.getElementById("search-bar").addEventListener('keyup', e => 
 //   {
@@ -535,7 +559,7 @@ async function displayProjectDesc() {
   const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
   const userData = await response1.json();
   let project = userData.Projects[curProjectId]
-  document.getElementById("project-desc").innerHTML = project.description;
+  document.getElementById("project-desc").innerHTML = "Project description: " + "<br>"+ project.description;
 }
 document.getElementById("signOut").addEventListener("click", signOut);
 function signOut() {
