@@ -70,11 +70,10 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => {
     activeOverlay.classList.add("hide");
     activeOverlay = null;
-    // reenable scrolling
     document.body.classList.remove("overflow-hidden");
+    // reenable scrolling
   });
 });
-
 
 
 // click a task
@@ -89,7 +88,9 @@ taskItems.forEach((task) => {
 
 // delete a task
 deleteTaskCTA.addEventListener("click", () => {
-  
+  activeOverlay.classList.add("hide");
+    activeOverlay = null;
+    document.body.classList.remove("overflow-hidden");
 });
 
 //status drop down 

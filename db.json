@@ -14,6 +14,14 @@
           "create_date": "10/2",
           "tasks": [
             {
+              "id": 0,
+              "taskTitle": "testt",
+              "description": "testd",
+              "due_date": "test22",
+              "status": "testok",
+              "create_date": "testcreate"
+            },
+            {
               "id": 1,
               "taskTitle": "testt",
               "description": "testd",
@@ -23,11 +31,16 @@
             },
             {
               "id": 2,
-              "taskTitle": "testt",
-              "description": "testd",
-              "due_date": "test22",
-              "status": "testok",
-              "create_date": "testcreate"
+              "taskTitle": "",
+              "description": "",
+              "due_date": "",
+              "status": "to-do",
+              "history": [
+                {
+                  "status": "To-do",
+                  "date": "7/1/2024"
+                }
+              ]
             },
             {
               "id": 3,
@@ -57,10 +70,10 @@
             },
             {
               "id": 5,
-              "taskTitle": "",
-              "description": "",
-              "due_date": "",
-              "status": "to-do",
+              "taskTitle": "Sample Task Title",
+              "description": "Sample Task Description",
+              "due_date": "2024-07-01",
+              "status": "To-do",
               "history": [
                 {
                   "status": "To-do",
@@ -70,10 +83,10 @@
             },
             {
               "id": 6,
-              "taskTitle": "",
-              "description": "",
-              "due_date": "",
-              "status": "to-do",
+              "taskTitle": "Sample Task Title",
+              "description": "Sample Task Description",
+              "due_date": "2024-07-01",
+              "status": "To-do",
               "history": [
                 {
                   "status": "To-do",
@@ -89,99 +102,26 @@
               "status": "to-do",
               "history": [
                 {
-                  "status": "To-do",
+                  "status": "to-do",
                   "date": "7/1/2024"
                 }
               ]
             },
             {
               "id": 8,
-              "taskTitle": "asdas",
-              "description": "aaaa",
-              "due_date": "2024-07-16",
-              "status": "in-progress",
-              "history": 2
+              "taskTitle": "",
+              "description": "",
+              "due_date": "",
+              "status": "to-do",
+              "history": [
+                {
+                  "status": "to-do",
+                  "date": "7/1/2024"
+                }
+              ]
             },
             {
               "id": 9,
-              "taskTitle": "Sample Task Title",
-              "description": "Sample Task Description",
-              "due_date": "2024-07-01",
-              "status": "To-do",
-              "history": [
-                {
-                  "status": "To-do",
-                  "date": "7/1/2024"
-                }
-              ]
-            },
-            {
-              "id": 10,
-              "taskTitle": "Sample Task Title",
-              "description": "Sample Task Description",
-              "due_date": "2024-07-01",
-              "status": "To-do",
-              "history": [
-                {
-                  "status": "To-do",
-                  "date": "7/1/2024"
-                }
-              ]
-            },
-            {
-              "id": 11,
-              "taskTitle": "",
-              "description": "",
-              "due_date": "",
-              "status": "to-do",
-              "history": [
-                {
-                  "status": "to-do",
-                  "date": "7/1/2024"
-                }
-              ]
-            },
-            {
-              "id": 12,
-              "taskTitle": "",
-              "description": "",
-              "due_date": "",
-              "status": "to-do",
-              "history": [
-                {
-                  "status": "to-do",
-                  "date": "7/1/2024"
-                }
-              ]
-            },
-            {
-              "id": 13,
-              "taskTitle": "test 10",
-              "description": "test-description22222",
-              "due_date": "2024-07-10",
-              "status": "to-do",
-              "history": [
-                {
-                  "status": "to-do",
-                  "date": "7/1/2024"
-                }
-              ]
-            },
-            {
-              "id": 14,
-              "taskTitle": "test 14",
-              "description": "",
-              "due_date": "2024-07-14",
-              "status": "in-progress",
-              "history": [
-                {
-                  "status": "to-do",
-                  "date": "7/1/2024"
-                }
-              ]
-            },
-            {
-              "id": 15,
               "taskTitle": "test 15",
               "description": "",
               "due_date": "2024-07-15",
@@ -194,7 +134,7 @@
               ]
             },
             {
-              "id": 16,
+              "id": 10,
               "taskTitle": "test 16",
               "description": "",
               "due_date": "2024-07-18",
@@ -207,7 +147,7 @@
               ]
             },
             {
-              "id": 17,
+              "id": 11,
               "taskTitle": "test 17",
               "description": "",
               "due_date": "2024-07-11",
@@ -220,7 +160,7 @@
               ]
             },
             {
-              "id": 18,
+              "id": 12,
               "taskTitle": "test 20",
               "description": "",
               "due_date": "2024-07-20",
@@ -233,7 +173,7 @@
               ]
             },
             {
-              "id": 19,
+              "id": 13,
               "taskTitle": "test 20",
               "description": "",
               "due_date": "2024-07-20",
@@ -246,7 +186,7 @@
               ]
             },
             {
-              "id": 20,
+              "id": 14,
               "taskTitle": "test 21",
               "description": "",
               "due_date": "2024-07-12",
@@ -259,7 +199,7 @@
               ]
             },
             {
-              "id": 21,
+              "id": 15,
               "taskTitle": "test 21",
               "description": "",
               "due_date": "2024-07-12",
@@ -272,46 +212,7 @@
               ]
             },
             {
-              "id": 22,
-              "taskTitle": "test201",
-              "description": "",
-              "due_date": "2024-07-04",
-              "status": "to-do",
-              "history": [
-                {
-                  "status": "to-do",
-                  "date": "7/1/2024"
-                }
-              ]
-            },
-            {
-              "id": 23,
-              "taskTitle": "test2222",
-              "description": "",
-              "due_date": "2024-07-10",
-              "status": "to-do",
-              "history": [
-                {
-                  "status": "to-do",
-                  "date": "7/1/2024"
-                }
-              ]
-            },
-            {
-              "id": 24,
-              "taskTitle": "test hatamleh 1111",
-              "description": "",
-              "due_date": "2024-08-10",
-              "status": "done",
-              "history": [
-                {
-                  "status": "done",
-                  "date": "7/1/2024"
-                }
-              ]
-            },
-            {
-              "id": 25,
+              "id": 16,
               "taskTitle": "abed",
               "description": "",
               "due_date": "2024-08-09",
@@ -327,24 +228,45 @@
         },
         {
           "id": 1,
-          "title": "hi",
-          "description": "",
-          "create_date": "6/30/2024",
-          "tasks": [
-            {
-              "id": 0,
-              "taskTitle": "xvxfgd",
-              "description": "hiii",
-              "due_date": "2024-07-31",
-              "status": "done",
-              "history": [
-                {
-                  "status": "done",
-                  "date": "7/1/2024"
-                }
-              ]
-            }
-          ]
+          "title": "sdgsg",
+          "description": "ascasdv",
+          "create_date": "7/2/2024",
+          "tasks": []
+        },
+        {
+          "id": 2,
+          "title": "quic",
+          "description": "ap",
+          "create_date": "7/2/2024",
+          "tasks": []
+        },
+        {
+          "id": 3,
+          "title": "quic",
+          "description": "ap",
+          "create_date": "7/2/2024",
+          "tasks": []
+        },
+        {
+          "id": 4,
+          "title": "quic",
+          "description": "ap",
+          "create_date": "7/2/2024",
+          "tasks": []
+        },
+        {
+          "id": 5,
+          "title": "quic",
+          "description": "ap",
+          "create_date": "7/2/2024",
+          "tasks": []
+        },
+        {
+          "id": 6,
+          "title": "quic",
+          "description": "ap",
+          "create_date": "7/2/2024",
+          "tasks": []
         }
       ]
     },
