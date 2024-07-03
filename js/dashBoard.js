@@ -2,7 +2,7 @@ const curUserId = new URLSearchParams(window.location.search).get("id");
 sessionStorage.setItem("curUserId", curUserId);
 getUserName()
 renderProjects()
-
+let historyOfTask = []
 const addProjBtn = document.getElementById("add-project-func")
 addProjBtn.addEventListener("click", e => {
   e.preventDefault()
@@ -11,6 +11,28 @@ addProjBtn.addEventListener("click", e => {
   // activeOverlay = null;
   // document.body.classList.remove("overflow-hidden");
   // renderProjects()
+})
+
+const projectBar = document.querySelector(".radio-buttons-container") 
+let isProjectBarVisible = false;
+document.getElementById("show-projects").addEventListener("click", () => {
+  if(isProjectBarVisible) {
+    // alert("hi")
+    isProjectBarVisible = false;
+    projectBar.classList.add("hide")
+  }
+  else {
+    // alert("ih")
+    isProjectBarVisible = true;
+    projectBar.classList.remove("hide")
+  }
+
+})
+
+document.getElementById("edit-project-done").addEventListener("click" , (e) => {
+e.preventDefault();
+alert("idk")
+EditProject();
 })
 const deleteTaskBtn = document.getElementById("delete-task-cta")
 deleteTaskBtn.addEventListener("click", (e) => {
@@ -57,14 +79,15 @@ document.getElementById("edit-task-btn").addEventListener("click", e =>
   {
     document.getElementById("task-edit-done").classList.remove("hidden")
   
-      var val = document.getElementById("curTaskTitle").innerText;
-      var input=document.createElement("input");
-      input.id = "title-selector"
-      input.value=val;
+      var val     = document.getElementById("curTaskTitle").innerText;
+      var input   = document.createElement("input");
+      input.id    = "title-selector"
+      input.value = val;
+      // Empty value and add input to 
       document.getElementById("curTaskTitle").innerText="";
       document.getElementById("curTaskTitle").appendChild(input);
       val = document.getElementById("curTaskDesc").innerText;
-      var newinput =document.createElement("input"); 
+      var newinput =document.createElement("textarea"); 
       newinput.id = "description-selector"
       newinput.value = val;
       document.getElementById("curTaskDesc").innerText="";
@@ -159,7 +182,7 @@ if (addTaskBtn) {
     }
   });
 }
-function handleTaskClick(id,title,desc,due_date,status) {
+function handleTaskClick(id,title,desc,due_date,status,history) {
   if (viewTaskOverlay) {
     viewTaskOverlay.classList.remove("hide")
     document.getElementById("curTaskId").textContent=id;
@@ -169,9 +192,20 @@ function handleTaskClick(id,title,desc,due_date,status) {
     document.getElementById("curTaskStatus").textContent=status;
     activeOverlay = viewTaskOverlay;
     document.body.classList.add("overflow-hidden");
+    console.log(history);
+    historyOfTask = history;
   }
 }
-
+document.getElementById("task-history-cta").addEventListener("click", () => {
+  const tablee = document.querySelector("table")
+  console.log(historyOfTask);
+  historyOfTask.forEach( element => {
+    const tablerow = document.createElement("tr");
+    tablerow.innerHTML = `<td>${element.status}</td>
+    <td>${element.date}</td>`
+    tablee.appendChild(tablerow);
+  })
+})
 async function createTask() {
   const curUserId = sessionStorage.getItem("curUserId");
   if (!curUserId) {
@@ -253,7 +287,7 @@ async function createTask() {
       newTaskElement
         .querySelector(".task-button")
         .addEventListener("click", () => {
-          handleTaskClick(newTask.id,newTask.taskTitle,newTask.description,newTask.due_date,newTask.status)
+          handleTaskClick(newTask.id,newTask.taskTitle,newTask.description,newTask.due_date,newTask.status,newTask.history)
         });
     }
 
@@ -302,25 +336,21 @@ async function EditTask() {
       description: document.getElementById("description-selector").value,
       due_date: document.getElementById("date-selector").value,
       status: document.getElementById("status-selector").value,
-      history: [
-        {
-          status: document.getElementById("status-selector").value,
-          date: new Date().toLocaleDateString(),
-        },
-      ],
+      history: currentTask.history
     };
   }
   else {
+    currentTask.history.push({
+      status: document.getElementById("status-selector").value,
+      date: new Date().toLocaleDateString(),
+    })
     newTask = {
       id: currentTask.id,
       taskTitle: document.getElementById("title-selector").value,
       description: document.getElementById("description-selector").value,
       due_date: document.getElementById("date-selector").value,
       status: document.getElementById("status-selector").value,
-      history: currentTask.history.push({
-        status: document.getElementById("status-selector").value,
-        date: new Date().toLocaleDateString(),
-      })
+      history: currentTask.history
     };
   }
 
@@ -333,25 +363,34 @@ async function EditTask() {
     },
     body: JSON.stringify(userData),
   });
+  renderProjects()
 }
 
-async function EditProject(project_id, edited_property, edited_value) {
-  const curUserId = new URLSearchParams(window.location.search).get("id");
+async function EditProject() {
+  let curProjectId = 0;
+  const radioViewOptions = document.querySelectorAll("input[name='view-option']");
+  radioViewOptions.forEach( (radio, index) => 
+    {
+      if(radio.checked) curProjectId = index;
+    }
+  )
+  // const curUserId = new URLSearchParams(window.location.search).get("id");
   const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
   const userData = await response1.json();
-  let ProjectId = project_id; //Get it somehow
-  let editedProperty = edited_property; //get it from poperty selected
-  let newEdit = edited_value; // get this from dom
+  let ProjectId = curProjectId; //Get it somehow
+  // let newEdit = edited_value; // get this from dom
   // console.log(userData.Projects[ProjectId][editedProperty])
-  userData.Projects[ProjectId][editedProperty] = newEdit;
+  userData.Projects[ProjectId].title =  document.getElementById("edit-project-title").value;
+  userData.Projects[ProjectId].description =  document.getElementById("project-edit-description").value;
   // console.log(userData.Projects[id].tasks)
-  fetch(`http://localhost:3000/users/${curUserId}`, {
+  await fetch(`http://localhost:3000/users/${curUserId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userData),
   });
+  renderProjects();
 }
 
 
@@ -367,9 +406,9 @@ async function deleteTask() {
   const returntojson = await getlastdata.json();
   const taskesindex = document.getElementById("curTaskId").innerHTML; //get from dom
   const ProjectID = curProjectId; //get from dom
-  console.log(returntojson.Projects[ProjectID].tasks);
+  // console.log(returntojson.Projects[ProjectID].tasks);
   returntojson.Projects[ProjectID].tasks =  returntojson.Projects[ProjectID].tasks.filter(cutproject=> cutproject.id != taskesindex );
-  console.log(returntojson.Projects[ProjectID].tasks);
+  // console.log(returntojson.Projects[ProjectID].tasks);
   returntojson.Projects[ProjectID].tasks.forEach((element, index) => {
       element.id = index;
   });
@@ -415,7 +454,7 @@ async function renderTasks(proj_Id) {
       newTaskElement
         .querySelector(".task-button")
         .addEventListener("click", () => {
-          handleTaskClick(element.id,element.taskTitle,element.description,element.due_date,element.status)
+          handleTaskClick(element.id,element.taskTitle,element.description,element.due_date,element.status,element.history)
         });
     }
   }
@@ -466,7 +505,7 @@ async function renderTasks(proj_Id) {
               quickview.style.top = (e.clientY + 10) + "px"
               quickview.style.left = (e.clientX + 4) + "px"
               quickview.style.visibility = "visible"
-              await setTimeout(() => {
+              setTimeout(() => {
                 quickview.style.visibility = "hidden"
               },1400);
             })
@@ -639,3 +678,16 @@ function signOut() {
 //         console.error(error)
 //     }
 // }
+document.getElementById('search-bar').addEventListener('keyup', function (event) {
+  
+      let input = event.target.value.toLowerCase();
+      let cards = document.querySelectorAll('.task-item');
+      let cardsname = document.querySelectorAll('.task-name');
+      cards.forEach((card , index) => {
+          let cardName = cardsname[index].innerText.toLowerCase();
+          card.style.display = 'none'; // إخفاء جميع الكروت
+          if (cardName.includes(input)) {
+              card.style.display = 'block'; // إظهار الكروت المطابقة فقط
+          }
+      });
+});
