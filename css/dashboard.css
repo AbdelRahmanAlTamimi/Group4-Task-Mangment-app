@@ -4,6 +4,7 @@ body.overflow-hidden {
 }
 .hidden {
   visibility: hidden;
+  
 }
 .content-container {
   padding-block: var(--space-32);
@@ -395,4 +396,8 @@ select{
 
 .hide {
   display: none !important;
+}
+
+#search-bar {
+  width: 25vw;
 }

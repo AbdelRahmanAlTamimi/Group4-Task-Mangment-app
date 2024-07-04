@@ -49,11 +49,29 @@ deleteProjectBtn.addEventListener("click", () =>
       if(radio.checked) ProjectId = index;
     }
   )
-  if(confirm("Are you sure You want to delete"))
-    {
+  // if(confirm("Are you sure You want to delete"))
+  //   {
+      
+  //   }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
       deleteProject(ProjectId);
       renderProjects()
-    }
+      }
+    });
 })
 
 async function deleteProject(project_id){
@@ -434,7 +452,7 @@ async function renderTasks(proj_Id) {
                 <button class="task-button">
                   <p class="task-name">${element.taskTitle}</p>
                   <p class="task-due-date">Due on ${element.due_date}</p>
-                  <iconify-icon icon="material-symbols:arrow-back-ios-rounded" style="color: black" width="18" height="18" class="arrow-icon"></iconify-icon>
+                  <iconify-icon icon="flowbite:dots-horizontal-outline" class="arrow-icon" width="1.5rem" height="1.5rem"></iconify-icon>
                 </button>
               </li>`;
     const myNewTask = document.createElement("div");
