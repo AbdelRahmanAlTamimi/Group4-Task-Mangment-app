@@ -29,7 +29,6 @@
       <div class="max-width-container  green-background navbar">
         <div class="header flex items-center justify-between">
           <h1 class="title"><img src="../img/taskey.png" alt=""></h1>
-          <div><h1 id="greeting">Welcome Fname</h1></div>
           <div class="buttons-container">
             <button id="add-project-cta"class="button regular-button blue-background show-modal"aria-haspopup="true">
               Add Project
@@ -38,8 +37,28 @@
           </div>
         </div>
       </div>
+      <div class="max-width-container green-background greeting-bar">
+        <div><h1 id="greeting">Welcome Fname</h1></div>
+        <button id="show-projects"class="button regular-button blue-background show-modal"aria-haspopup="true">
+          Show/Hide Projects
+        </button>
+      </div>
       <!-- radio buttons -->
-      <div class="radio-buttons-container disable-margin-top  ">
+      <div class="radio-buttons-container disable-margin-top hide ">
+        <div class="project-info">
+          <h2>Your Projects: </h2>
+          <span id="project-desc">Title</span>
+          <div class="Project-details">
+            <button class="button circle-button pink-background flex justify-center items-center" id="edit-project-btn">
+              <iconify-icon icon="material-symbols:edit-rounded" style="color: black" width="24" height="24"></iconify-icon>
+            </button>
+            <button id="delete-project-btn" class="button circle-button pink-background flex justify-center items-center">
+              <iconify-icon icon="ic:round-delete" style="color: black" width="24" height="24"></iconify-icon>
+            </button>
+            
+          </div>
+        </div>
+        
         <div class="max-width-container flex" id="project-display">
         </div>
       </div>
@@ -56,12 +75,15 @@
         list-bulleted
         <img src="../img/add.png" alt="" id="add-img">
         </button> -->
+        <div class="max-width-container bar-under-projects">
+          
+          
+        </div>
         <div class="max-width-container add-task-container">
           <button id="add-task-cta"class="button regular-button blue-background show-modal"aria-haspopup="true">
             Add task
           </button>
-          <span id="project-desc">Title</span>
-          <div class="hidden">
+          <div>
             <label for="search-bar">Search:</label>
             <input type="text" id="search-bar">
           </div>
@@ -115,7 +137,7 @@
       <div class="overlay-content pink-background">
         <!-- close button -->
         <button
-          class="button circle-button blue-background flex justify-center items-center close-button">
+          class="button circle-button pink-background flex justify-center items-center close-button">
           <iconify-icon icon="material-symbols:close-rounded" style="color: black" width="26" height="26"></iconify-icon>
         </button>
 
@@ -147,7 +169,7 @@
           <div class="text-center">
             <button type="submit" id="addTask" class="button regular-button green-background cta-button">
               Add task
-            </button>
+            </button> 
           </div>
         </form>
       </div>
@@ -157,7 +179,7 @@
       <div class="overlay-content green-background">
         <!-- close button -->
         <button
-          class="button circle-button blue-background flex justify-center items-center close-button">
+          class="button circle-button pink-background flex justify-center items-center close-button">
           <iconify-icon icon="material-symbols:close-rounded" style="color: black" width="26" height="26"></iconify-icon>
         </button>
 
@@ -176,12 +198,12 @@
         </form>
       </div>
     </div>
-    <!-- add project -->
-    <div id="set-project-overlay" class="overlay set-project-overlay hide">
-      <div class="overlay-content green-background">
+    <!-- edit project -->
+    <div id="edit-project-overlay" class="overlay edit-project-overlay hide">
+      <div class="overlay-content blue-background">
         <!-- close button -->
         <button
-          class="button circle-button blue-background flex justify-center items-center close-button"
+          class="button circle-button pink-background flex justify-center items-center close-button"
         >
           <iconify-icon
             icon="material-symbols:close-rounded"
@@ -190,34 +212,53 @@
             height="26"
           ></iconify-icon>
         </button>
-        <h1 class="header">Add Project</h1>
-        <form class="form" autocomplete="off">
-          <label for="name" class="label">title</label>
+        <h1 class="header">Edit Project</h1>
+          <label for="name" class="label">Title</label>
           <input
             type="text"
             name="name"
-            id="name"
+            id="edit-project-title"
             class="input white-background"
             required
           />
           <label for="description" class="label">Description</label>
           <textarea
             name="description"
-            id="description"
+            id="project-edit-description"
             rows="8"
             class="textarea-input white-background"
-            required
           ></textarea>
-          <!-- <h2 class="label">Due date</h2> -->
           <div class="text-center">
             <button
               type="submit"
               class="button regular-button green-background cta-button"
+              id= "edit-project-done"
             >
-              Add Project
+              Edit Project
             </button>
           </div>
-        </form>
+      </div>
+    </div>
+    <!-- Task history -->
+    <div id="Task-history-overlay" class="overlay edit-project-overlay hide">
+      <div class="overlay-content blue-background">
+        <!-- close button -->
+        <button
+          class="button circle-button pink-background flex justify-center items-center close-button"
+        >
+          <iconify-icon
+            icon="material-symbols:close-rounded"
+            style="color: black"
+            width="26"
+            height="26"
+          ></iconify-icon>
+        </button>
+        <table class="history-table">
+          <tr>
+            <th>Status: </th>
+            <th>Date: </th>
+          </tr>
+        </table>
       </div>
     </div>
     <!-- view task -->
@@ -225,7 +266,7 @@
       <div class="overlay-content green-background">
         <!-- close button -->
         <button
-          class="button circle-button blue-background flex justify-center items-center close-button"
+          class="button circle-button pink-background flex justify-center items-center close-button"
         >
           <iconify-icon
             icon="material-symbols:close-rounded"
@@ -241,10 +282,10 @@
         <p class="value task-info" id="curTaskTitle"></p>
         <h1 class="header">Description</h1>
         <p class="value task-info" id="curTaskDesc"></p>
-        <div class="flex items-center">
-          <h1 class="header">Due date</h1> <br>
+        <!-- <div class="flex items-center"> -->
+          <h1 class="header">Due date</h1>
           <p class="value" id="curTaskDueDate"></p>
-        </div>
+        <!-- </div> -->
         <div class="flex items-center">
           <h1 class="header min-width">Status</h1>
           <p class="value" id="curTaskStatus">
@@ -322,7 +363,7 @@
           <!-- History -->
           <button
           id="task-history-cta"
-          class="button circle-button pink-background flex justify-center items-center hidden">
+          class="button circle-button pink-background flex justify-center items-center">
         <img src="../img/historyy.png" alt="">
         </button>
         <button
@@ -340,8 +381,9 @@
       <div class="flex quickview-line" id="progress-counter"><div class="circle blue-background"></div>: Y</div>
       <div class="flex quickview-line" id="done-counter"><div class="circle green-background"></div>: Z</div>
     </div>
-
     
+    <!-- Import sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- import IconifyIcon web component -->
     <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>
     <!-- js -->

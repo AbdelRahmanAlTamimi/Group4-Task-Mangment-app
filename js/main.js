@@ -17,6 +17,9 @@ const deleteTaskCTA = document.getElementById("delete-task-cta");
 const notification = document.getElementById("notification");
 const quickview = document.getElementById("project-quickview");
 const taskStatusBtn = document.getElementById("status-dropdown-task-overview");
+const EditProjectOverlay = document.getElementById("edit-project-overlay")
+const EditProjectBtn = document.getElementById("edit-project-btn");
+const TaskHistoryOverlay = document.getElementById("Task-history-overlay");
 
 // the current active overlay
 let activeOverlay = null;
@@ -27,15 +30,14 @@ radioViewOptions.forEach((radioButton) => {
   radioButton.parentNode.addEventListener("mouseenter",async (e) =>
     { 
       // quickview.style.visibility = "visible"
-      await setTimeout(() => {
+      setTimeout(() => {
         quickview.style.visibility = "visible"
       },1000);
-      quickview.style.top = e.clientY + "px"
-      quickview.style.left = e.clientX + "px"
-      quickview.style.visibility = "visible"
+      quickview.style.top = (e.clientY + 10) + "px"
+      quickview.style.left = e.clientX + "px" 
       await setTimeout(() => {
         quickview.style.visibility = "hidden"
-      },3000);
+      },5000);
 
     })
 
@@ -65,6 +67,16 @@ addProjectCTA.addEventListener("click", () => {
   // disable scrolling for content behind the overlay
   document.body.classList.add("overflow-hidden");
 });
+
+// edit project 
+EditProjectBtn.addEventListener("click", () => {
+  document.getElementById("edit-project-title").value = "";
+  document.getElementById("project-edit-description").value = "";
+  EditProjectOverlay.classList.remove("hide");
+  activeOverlay = EditProjectOverlay;
+  // disable scrolling for content behind the overlay
+  document.body.classList.add("overflow-hidden");
+})
 // close buttons inside overlays
 closeButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -74,7 +86,12 @@ closeButtons.forEach((button) => {
     // reenable scrolling
   });
 });
-
+document.getElementById("task-history-cta").addEventListener("click", () => {
+  activeOverlay.classList.add("hide");
+  TaskHistoryOverlay.classList.remove("hide");
+  activeOverlay = TaskHistoryOverlay;
+  document.body.classList.add("overflow-hidden");
+})
 
 // click a task
 taskItems.forEach((task) => {
@@ -93,6 +110,17 @@ deleteTaskCTA.addEventListener("click", () => {
     document.body.classList.remove("overflow-hidden");
 });
 
+document.getElementById("task-edit-done").addEventListener("click", () =>
+{
+  activeOverlay.classList.add("hide");
+  activeOverlay = null;
+  document.body.classList.remove("overflow-hidden");
+} )
+document.getElementById("add-project-func").addEventListener("click", () => {
+  activeOverlay.classList.add("hide");
+  activeOverlay = null;
+  document.body.classList.remove("overflow-hidden");
+})
 //status drop down 
 // taskStatusBtn.addEventListener("click", (e) =>
 // {

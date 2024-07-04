@@ -2,92 +2,152 @@
   "users": [
     {
       "id": "0",
-      "fname": "abood",
-      "lname": "tamimi",
+      "fname": "qqqqq",
+      "lname": "qqqqq",
       "email": "1@1",
       "password": "1234",
       "Projects": [
         {
           "id": 0,
-          "title": "git finder",
-          "description": "this is a descreption for project 1",
-          "create_date": "10/2",
-          "tasks": []
-        },
-        {
-          "id": 1,
-          "title": "Task managment",
-          "description": "Project for Orange",
+          "title": "newproj",
+          "description": "aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaa",
           "create_date": "10/2",
           "tasks": [
             {
               "id": 0,
-              "taskTitle": "home page",
-              "description": "create figma html & css home page",
-              "due_date": "2024-10-20",
-              "status": "in-progress",
-              "history": 2
-            },
-            {
-              "id": 1,
-              "taskTitle": "log in",
-              "description": "create figma, html, css & JS for log in page",
-              "due_date": "3-7-2024",
-              "status": "to-do",
-              "create_date": "1-7-2024"
-            },
-            {
-              "id": 2,
-              "taskTitle": "sign up",
-              "description": "create figma, html, css & JS for sign up page",
-              "due_date": "4-7-2024",
-              "status": "to-do",
-              "create_date": "1-7-2024"
-            },
-            {
-              "id": 3,
-              "taskTitle": "Dash Board",
-              "description": "",
-              "due_date": "10-10-2024",
+              "taskTitle": "test2354",
+              "description": "idk",
+              "due_date": "2024-08-08",
               "status": "to-do",
               "history": [
                 {
+                  "status": "to-do",
+                  "date": "7/3/2024"
+                }
+              ]
+            },
+            {
+              "id": 1,
+              "taskTitle": "Sample Task Title",
+              "description": "Sample Task Description",
+              "due_date": "2024-07-01",
+              "status": "To-do",
+              "history": [
+                {
                   "status": "To-do",
+                  "date": "7/1/2024"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "taskTitle": "Sample Task Title",
+              "description": "Sample Task Description",
+              "due_date": "2024-07-01",
+              "status": "To-do",
+              "history": [
+                {
+                  "status": "To-do",
+                  "date": "7/1/2024"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "taskTitle": "tes",
+              "description": "11",
+              "due_date": "2024-07-10",
+              "status": "to-do",
+              "history": [
+                {
+                  "status": "to-do",
+                  "date": "7/3/2024"
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "taskTitle": "test 15",
+              "description": "",
+              "due_date": "2024-07-15",
+              "status": "done",
+              "history": [
+                {
+                  "status": "to-do",
+                  "date": "7/1/2024"
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "taskTitle": "test 17",
+              "description": "",
+              "due_date": "2024-07-11",
+              "status": "done",
+              "history": [
+                {
+                  "status": "to-do",
+                  "date": "7/1/2024"
+                }
+              ]
+            },
+            {
+              "id": 6,
+              "taskTitle": "test 20",
+              "description": "",
+              "due_date": "2024-07-20",
+              "status": "in-progress",
+              "history": [
+                {
+                  "status": "to-do",
+                  "date": "7/1/2024"
+                }
+              ]
+            },
+            {
+              "id": 7,
+              "taskTitle": "test 20",
+              "description": "",
+              "due_date": "2024-07-20",
+              "status": "in-progress",
+              "history": [
+                {
+                  "status": "to-do",
+                  "date": "7/1/2024"
+                }
+              ]
+            },
+            {
+              "id": 8,
+              "taskTitle": "test 21",
+              "description": "",
+              "due_date": "2024-07-12",
+              "status": "done",
+              "history": [
+                {
+                  "status": "to-do",
                   "date": "7/1/2024"
                 }
               ]
             },
             {
               "id": 9,
-              "taskTitle": "Sample Task Title",
-              "description": "Sample Task Description",
-              "due_date": "2024-07-01",
-              "status": "To-do",
+              "taskTitle": "test 21",
+              "description": "",
+              "due_date": "2024-07-12",
+              "status": "done",
               "history": [
                 {
-                  "status": "To-do",
+                  "status": "to-do",
                   "date": "7/1/2024"
                 }
               ]
             },
             {
               "id": 10,
-              "taskTitle": "Sample Task Title",
-              "description": "Sample Task Description",
-              "due_date": "2024-07-01",
-              "status": "To-do",
-              "history": [
-                {
-                  "status": "To-do",
-                  "date": "7/1/2024"
-                }
-              ]
-            },
-            {
-              "id": 39,
-              "taskTitle": "hesham",
-              "description": "najem",
-              "due_date": "2024-07-02",
+              "taskTitle": "abed",
+              "description": "",
+              "due_date": "2024-08-09",
               "status": "in-progress",
               "history": [
                 {
@@ -95,17 +155,25 @@
                   "date": "7/1/2024"
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "title": "sausage",
+          "description": "yea",
+          "create_date": "7/2/2024",
+          "tasks": [
             {
-              "id": 44,
-              "taskTitle": "yoyo",
-              "description": "koko",
-              "due_date": "2024-07-10",
-              "status": "to-do",
+              "id": 0,
+              "taskTitle": "uscasd",
+              "description": "sadcsddddd",
+              "due_date": "2024-07-26",
+              "status": "in-progress",
               "history": [
                 {
-                  "status": "to-do",
-                  "date": "7/1/2024"
+                  "status": "in-progress",
+                  "date": "7/3/2024"
                 }
               ]
             }
@@ -113,9 +181,65 @@
         },
         {
           "id": 2,
-          "title": "test",
-          "description": "test",
-          "create_date": "7/2/2024",
+          "title": "iuasdkv",
+          "description": "sadvhu",
+          "create_date": "7/3/2024",
+          "tasks": []
+        },
+        {
+          "id": 3,
+          "title": "iuasdkv",
+          "description": "sadvhu",
+          "create_date": "7/3/2024",
+          "tasks": []
+        },
+        {
+          "id": 4,
+          "title": "1342",
+          "description": "00",
+          "create_date": "7/3/2024",
+          "tasks": []
+        },
+        {
+          "id": 5,
+          "title": "000",
+          "description": "00",
+          "create_date": "7/3/2024",
+          "tasks": []
+        },
+        {
+          "id": 6,
+          "title": "00022",
+          "description": "00",
+          "create_date": "7/3/2024",
+          "tasks": []
+        },
+        {
+          "id": 7,
+          "title": "00022",
+          "description": "00",
+          "create_date": "7/3/2024",
+          "tasks": []
+        },
+        {
+          "id": 8,
+          "title": "00022",
+          "description": "00",
+          "create_date": "7/3/2024",
+          "tasks": []
+        },
+        {
+          "id": 9,
+          "title": "00022",
+          "description": "00",
+          "create_date": "7/3/2024",
+          "tasks": []
+        },
+        {
+          "id": 10,
+          "title": "newprojee",
+          "description": "idk",
+          "create_date": "7/4/2024",
           "tasks": []
         }
       ]
@@ -136,158 +260,59 @@
     },
     {
       "id": "3",
-      "fname": "salameh",
-      "lname": "yaseen",
-      "email": "OCA@gmail.com",
-      "password": "123456",
+      "fname": "test",
+      "lname": "test",
+      "email": "koko6030@gmail.com",
+      "password": "12345678",
       "Projects": [
         {
           "id": 0,
-          "title": "Jury",
-          "description": "in Aqaba",
-          "create_date": "7/2/2024",
+          "title": "test1",
+          "description": "this is the final test",
+          "create_date": "7/4/2024",
           "tasks": [
             {
               "id": 0,
-              "taskTitle": "change language",
+              "taskTitle": "todo task",
               "description": "",
-              "due_date": "2024-07-02",
+              "due_date": "2024-07-04",
               "status": "to-do",
               "history": [
                 {
                   "status": "to-do",
-                  "date": "7/2/2024"
+                  "date": "7/4/2024"
                 }
               ]
             },
             {
               "id": 1,
-              "taskTitle": "bug report",
-              "description": "Correct english language",
-              "due_date": "2024-07-27",
-              "status": "to-do",
+              "taskTitle": "doing task",
+              "description": "",
+              "due_date": "2024-07-18",
+              "status": "in-progress",
               "history": [
                 {
-                  "status": "to-do",
-                  "date": "7/2/2024"
+                  "status": "in-progress",
+                  "date": "7/4/2024"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "taskTitle": "done task",
+              "description": "",
+              "due_date": "2024-07-03",
+              "status": "done",
+              "history": [
+                {
+                  "status": "done",
+                  "date": "7/4/2024"
                 }
               ]
             }
           ]
         }
       ]
-    },
-    {
-      "id": "4",
-      "fname": "amro",
-      "lname": "shandaq",
-      "email": "OCA@gmial.com",
-      "password": "12345",
-      "Projects": [
-        {
-          "id": 0,
-          "title": "evaluation",
-          "description": "for group 4 & 5",
-          "create_date": "7/2/2024",
-          "tasks": [
-            {
-              "id": 0,
-              "taskTitle": "Evaluation for group 4",
-              "description": "for roaa & rasha",
-              "due_date": "2024-07-03",
-              "status": "done",
-              "history": 2
-            }
-          ]
-        },
-        {
-          "id": 1,
-          "title": "test",
-          "description": "",
-          "create_date": "7/2/2024",
-          "tasks": []
-        }
-      ]
-    },
-    {
-      "id": "5",
-      "fname": "rasha",
-      "lname": "yaseen",
-      "email": "rasha@test",
-      "password": "12345",
-      "Projects": []
-    },
-    {
-      "id": "6",
-      "fname": "test4",
-      "lname": "test4",
-      "email": "test@test.4",
-      "password": "1234",
-      "Projects": []
-    },
-    {
-      "id": "7",
-      "fname": "test6",
-      "lname": "test6",
-      "email": "test@test.6",
-      "password": "1234",
-      "Projects": []
-    },
-    {
-      "id": "8",
-      "fname": "test7",
-      "lname": "tset7",
-      "email": "test@test.7",
-      "password": "1234",
-      "Projects": []
-    },
-    {
-      "id": "9",
-      "fname": "test8",
-      "lname": "test8",
-      "email": "test@test.8",
-      "password": "1234",
-      "Projects": []
-    },
-    {
-      "id": "10",
-      "fname": "test9",
-      "lname": "test9",
-      "email": "test@test.9",
-      "password": "1234",
-      "Projects": []
-    },
-    {
-      "id": "11",
-      "fname": "test10",
-      "lname": "test10",
-      "email": "test@test.10",
-      "password": "1234",
-      "Projects": []
-    },
-    {
-      "id": "12",
-      "fname": "test11",
-      "lname": "",
-      "email": "",
-      "password": "",
-      "Projects": []
-    },
-    {
-      "id": "13",
-      "fname": "abood",
-      "lname": "meshal",
-      "email": "tamimi3060@gmail.com",
-      "password": "123456789",
-      "Projects": []
-    },
-    {
-      "id": "14",
-      "fname": "ala",
-      "lname": "koko",
-      "email": "koko6030@gmail.com",
-      "password": "12345678",
-      "Projects": []
     }
   ]
 }
