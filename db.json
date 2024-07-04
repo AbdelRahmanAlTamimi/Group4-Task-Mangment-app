@@ -136,52 +136,6 @@
     },
     {
       "id": "3",
-<<<<<<< HEAD
-      "fname": "Kholoud",
-      "lname": "Juhany",
-      "email": "kholoud@gmail.com",
-      "password": "2504",
-      "Projects": []
-    },
-    {
-      "id": "4",
-      "fname": "Mojo",
-      "lname": "Athlead",
-      "email": "mojo@gmail.com",
-      "password": "1111",
-      "Projects": []
-    },
-    {
-      "id": "5",
-      "fname": "ewfewfewfe",
-      "lname": "wefewfefwf",
-      "email": "dfsdfdsfds@gmail.com",
-      "password": "",
-      "Projects": []
-    },
-    {
-      "id": "6",
-      "fname": "efewfwefew",
-      "lname": "ewfefewewf",
-      "email": "ewfwefewf@gmail.com",
-      "password": "846454",
-      "Projects": []
-    },
-    {
-      "id": "7",
-      "fname": "",
-      "lname": "",
-      "email": "",
-      "password": "",
-      "Projects": []
-    },
-    {
-      "id": "8",
-      "fname": "dfvgfdgdfg",
-      "lname": "sngkfgksm",
-      "email": "dsggflkmg@gmail.com",
-      "password": "5561684684",
-=======
       "fname": "salameh",
       "lname": "yaseen",
       "email": "OCA@gmail.com",
@@ -261,7 +215,78 @@
       "lname": "yaseen",
       "email": "rasha@test",
       "password": "12345",
->>>>>>> 5247d50 (final)
+      "Projects": []
+    },
+    {
+      "id": "6",
+      "fname": "test4",
+      "lname": "test4",
+      "email": "test@test.4",
+      "password": "1234",
+      "Projects": []
+    },
+    {
+      "id": "7",
+      "fname": "test6",
+      "lname": "test6",
+      "email": "test@test.6",
+      "password": "1234",
+      "Projects": []
+    },
+    {
+      "id": "8",
+      "fname": "test7",
+      "lname": "tset7",
+      "email": "test@test.7",
+      "password": "1234",
+      "Projects": []
+    },
+    {
+      "id": "9",
+      "fname": "test8",
+      "lname": "test8",
+      "email": "test@test.8",
+      "password": "1234",
+      "Projects": []
+    },
+    {
+      "id": "10",
+      "fname": "test9",
+      "lname": "test9",
+      "email": "test@test.9",
+      "password": "1234",
+      "Projects": []
+    },
+    {
+      "id": "11",
+      "fname": "test10",
+      "lname": "test10",
+      "email": "test@test.10",
+      "password": "1234",
+      "Projects": []
+    },
+    {
+      "id": "12",
+      "fname": "test11",
+      "lname": "",
+      "email": "",
+      "password": "",
+      "Projects": []
+    },
+    {
+      "id": "13",
+      "fname": "abood",
+      "lname": "meshal",
+      "email": "tamimi3060@gmail.com",
+      "password": "123456789",
+      "Projects": []
+    },
+    {
+      "id": "14",
+      "fname": "ala",
+      "lname": "koko",
+      "email": "koko6030@gmail.com",
+      "password": "12345678",
       "Projects": []
     }
   ]
