@@ -3,6 +3,41 @@ sessionStorage.setItem("curUserId", curUserId);
 getUserName()
 renderProjects()
 
+const addProjBtn = document.getElementById("add-project-func")
+addProjBtn.addEventListener("click", e => {
+  e.preventDefault()
+  createProject()
+  // activeOverlay.classList.add("hide");
+  // activeOverlay = null;
+  // document.body.classList.remove("overflow-hidden");
+  // renderProjects()
+})
+const deleteTaskBtn = document.getElementById("delete-task-cta")
+deleteTaskBtn.addEventListener("click", (e) => {
+  e.preventDefault()
+  deleteTask();
+  
+})
+
+async function deleteProject(project_id){
+  const userid = new URLSearchParams(window.location.search).get('id');
+  const getlastdata = await fetch(`http://localhost:3000/users/${userid}`)
+  const returntojson = await getlastdata.json();
+  const ProjectID = project_id //getfrom dom
+  returntojson.Projects =  returntojson.Projects.filter(cutproject=>cutproject.id !== ProjectID )
+  returntojson.Projects.forEach((element, index) => {
+      element.id = index;
+  });
+  await fetch(`http://localhost:3000/users/${userid}`, {
+      method : 'PATCH',
+      headers: {
+          "Content-Type": "application/json",
+        },
+      body : JSON.stringify(returntojson) 
+  })
+  renderProjects();
+}
+
 document.getElementById("edit-task-btn").addEventListener("click", e =>
   {
     document.getElementById("task-edit-done").classList.remove("hidden")
@@ -54,73 +89,40 @@ document.getElementById("task-edit-done").addEventListener("click", () =>
 })
 async function getUserName() 
 {
+  const curUserId = new URLSearchParams(window.location.search).get("id");
   const response = await fetch(`http://localhost:3000/users/${curUserId}`)
   const data = await response.json()
   document.getElementById("greeting").innerText = "Welcome " + data.fname
 }
-async function createProject() {
-  const curUserId = new URLSearchParams(window.location.search).get("id");
-  const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
-  const userData = await response1.json();
-  let newPorject = {
-    id: userData.Projects.length,
-    // title: document.getElementById("projectTitle").value, // Change to dom controllers
-    title: "hi", // Change to dom controllers
-    description: "", //document.getElementById("projectDescription").value, // Change to dom controllers
-    create_date: new Date().toLocaleDateString(), // Change to dom controllers
-    tasks: [],
-  };
-  userData.Projects.push(newPorject);
-
-  await fetch(`http://localhost:3000/users/${curUserId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
-
-  // Append child to aside that have the project name & three dots button
-  const projectList = document.getElementById("project-display");
-  const projectItem = document.createElement("div");
-  projectItem.classList.add("project-item");
-
-  const projectName = document.createElement("span");
-  projectName.textContent = newPorject.title;
-
-  const projectMenu = document.createElement("button");
-  projectMenu.textContent = "...";
-  projectMenu.classList.add("project-menu");
-
-  projectItem.appendChild(projectName);
-  projectItem.appendChild(projectMenu);
-  projectList.appendChild(projectItem);
-
-  // When click on this div it will appear the number of tasks for each status
-  projectItem.addEventListener("click", () => {
-    const taskSummary = document.getElementById("taskSummary");
-    taskSummary.innerHTML = `To Do: ${
-      newPorject.tasks.filter((task) => task.status === "To Do").length
+async function createProject()
+{
+    const response1 = await fetch(`http://localhost:3000/users/${curUserId}`)
+    const userData = await response1.json()
+    let newProjectId = 0;
+    if(userData.Projects.length == 0) newProjectId = 0;
+    else {
+        newProjectId = userData.Projects[userData.Projects.length - 1].id + 1
     }
-      In Progress: ${
-        newPorject.tasks.filter((task) => task.status === "In Progress").length
+    let newPorject = {
+        id : newProjectId,
+        title: document.getElementById("ProjectTitle").value, //"Test-title",   //Change to dom controllers
+        description: document.getElementById("Projectdescription").value, //Change to dom controllers
+        create_date:  new Date().toLocaleDateString(),
+        tasks: []
       }
-      Done: ${
-        newPorject.tasks.filter((task) => task.status === "Done").length
-      }`;
-  });
-
-  // When click on this div it will appear the project details
-  projectItem.addEventListener("click", () => {
-    const projectDetails = document.getElementById("projectDetails");
-    projectDetails.innerHTML = `
-      <h3>${newPorject.title}</h3>
-      <p>${newPorject.description}</p>
-      <p>${newPorject.content}</p>
-      <p>Created on: ${newPorject.create_date}</p>
-    `;
-  });
+      userData.Projects.push(newPorject)
+    const response = await fetch(`http://localhost:3000/users/${curUserId}`, {
+        method : 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+          },
+        body : JSON.stringify(userData)
+    })
+  window.location.href = `dashBoard.html?id=${curUserId}`;
 }
+  // Append child to aside that have the project name & three dots button
+
+
 
 // const taskButtons = document.querySelectorAll(".task-button");
 // taskButtons.forEach((taskButton) => {
@@ -248,7 +250,7 @@ async function createTask() {
 
 
 async function EditTask() {
-  const curUserId = new URLSearchParams(window.location.search).get("id");
+  // const curUserId = new URLSearchParams(window.location.search).get("id");
   const response1 = await fetch(`http://localhost:3000/users/${curUserId}`);
   const userData = await response1.json();
   const radioViewOptions = document.querySelectorAll("input[name='view-option']");
@@ -337,35 +339,22 @@ async function EditProject(project_id, edited_property, edited_value) {
   });
 }
 
-async function deletproject(project_id) {
+
+async function deleteTask() {
+  let curProjectId = 0;
+  radioViewOptions.forEach((radio, index) => {
+    if (radio.checked) curProjectId = index;
+  });
   const userid = new URLSearchParams(window.location.search).get("id");
   const getlastdata = await fetch(`http://localhost:3000/users/${userid}`);
   const returntojson = await getlastdata.json();
-  const ProjectID = project_id; //getfrom dom
-  returntojson.Projects = returntojson.Projects.filter(
-    (cutproject) => cutproject.id !== ProjectID
-  );
-  returntojson.Projects.forEach((element, index) => {
-    element.id = index;
-  });
-  await fetch(`http://localhost:3000/users/${userid}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(returntojson),
-  });
-}
-
-async function deleteTask(task_id, project_id) {
-  const userid = new URLSearchParams(location.search).get("id");
-  const getlastdata = await fetch(`http://localhost:3000/users/${userid}`);
-  const returntojson = await getlastdata.json();
-  const ProjectID = project_id; //get from dom
-  const taskesindex = task_id; //get from dom
+  const taskesindex = document.getElementById("curTaskId").innerHTML; //get from dom
+  const ProjectID = curProjectId; //get from dom
+  console.log(returntojson.Projects[ProjectID].tasks);
   returntojson.Projects[ProjectID].tasks = returntojson.Projects[
     ProjectID
-  ].tasks.filter((cuttaskes) => cuttaskes.id !== taskesindex);
+  ].tasks.filter((cutproject) => cutproject.id != taskesindex);
+  console.log(returntojson.Projects[ProjectID].tasks);
   returntojson.Projects[ProjectID].tasks.forEach((element, index) => {
     element.id = index;
   });
@@ -419,12 +408,27 @@ async function renderTasks(proj_Id) {
 }
 
   async function renderProjects() {
+    const curUserId = new URLSearchParams(window.location.search).get("id");
     const response = await fetch(`http://localhost:3000/users/${curUserId}`)
     const data = await response.json()
-    let template = ''
+    document.getElementById("project-display").innerHTML = " ";
     data.Projects.forEach( project => {
-      template += `
-      <div class="radio-container">
+      let todoCounter = 0;
+      let doingCounter = 0;
+      let doneCounter = 0;
+      project.tasks.forEach( el => {
+        if(el.status == "to-do") 
+          {
+            todoCounter += 1 ;
+          }
+        else if(el.status == "in-progress") {
+          doingCounter += 1;
+        } 
+        else if(el.status == "done") {
+          doneCounter += 1; } })
+      const container = document.createElement("div")
+      container.classList.add("radio-container")
+     container.innerHTML = `
             <input
               type="radio"
               id="${project.id}"
@@ -435,11 +439,29 @@ async function renderTasks(proj_Id) {
             />
             <label for="${project.id}" class="radio-label">
               <span>${project.title}</span>
-            </label>
-          </div>`
-    })
-    const projectsContainer = document.getElementById("project-display");
-    projectsContainer.innerHTML = template;
+            </label>`
+            const projectsContainer = document.getElementById("project-display");
+            container.addEventListener("mouseenter", async (e) => {
+              // quickview.style.visibility = "visible"
+              document.getElementById("to-do-counter").innerHTML = `<div class="circle pink-background"></div>: ${todoCounter}`
+              document.getElementById("progress-counter").innerHTML = `<div class="circle blue-background"></div>: ${doingCounter}`
+              document.getElementById("done-counter").innerHTML = `<div class="circle green-background"></div>: ${doneCounter}`
+              
+              quickview.style.top = e.clientY + "px"
+              quickview.style.left = e.clientX + "px"
+              quickview.style.visibility = "visible"
+              await setTimeout(() => {
+                quickview.style.visibility = "hidden"
+              },1400);
+            })
+            container.addEventListener("contextmenu", (e) => {
+              e.preventDefault();
+              deleteProject(project.id);
+            })
+            projectsContainer.appendChild(container)
+          }
+    )
+    
     const radioViewOptions = document.querySelectorAll("input[name='view-option']");
     radioViewOptions.forEach( radio =>
       {
@@ -448,6 +470,7 @@ async function renderTasks(proj_Id) {
         })
       }
     )
+      
     displayProjectDesc()
   }
 // document.getElementById("search-bar").addEventListener('keyup', e => 

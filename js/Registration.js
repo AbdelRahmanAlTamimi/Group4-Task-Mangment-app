@@ -22,6 +22,7 @@ async function registrationForm() {
     let newUser = await createUser(data);
     console.log("User created:", newUser);
     document.getElementById("registrationForm").reset();
+<<<<<<< HEAD
 
     Swal.fire({
       title: 'The user has been added successfully, you will be redirected to the login page',
@@ -30,6 +31,10 @@ async function registrationForm() {
     }).then(() => {
       window.location.href = "login.html";
     });
+=======
+    alert("done")
+    window.location.href = "login.html";
+>>>>>>> 5247d50 (final)
   }
 }
 
@@ -73,3 +78,23 @@ async function validateUser(data) {
     return false;
   }
 }
+
+// document
+//   .getElementById("registrationBtn")
+//   .addEventListener("click", function (event) {
+//     event.preventDefault();
+//     // Swal.fire({
+//     //   title:
+//     //     "The user has been added successfully, you will be redirected to the login page",
+//     //   icon: "success",
+//     //   confirmButtonText: "OK",
+//     // });
+//     setTimeout(function () {
+//           Swal.fire(
+//             "The user has been added successfully, you will be redirected to the login page"
+//           );
+
+//     },3000)
+//     console.log("It's working");
+//     window.location.href = "../html/login.html";
+//   });

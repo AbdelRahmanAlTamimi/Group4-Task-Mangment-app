@@ -41,38 +41,6 @@
       <!-- radio buttons -->
       <div class="radio-buttons-container disable-margin-top  ">
         <div class="max-width-container flex" id="project-display">
-          <div class="radio-container">
-            <input
-              type="radio"
-              id="list"
-              name="view-option"
-              value="list"
-              class="radio-input"
-              checked
-            />
-            <label for="list" class="radio-label">
-              <span>Project 1 lore msad fdasds adfasdf asdf</span>
-            </label>
-          </div>
-          <div class="radio-container">
-            <input
-              type="radio"
-              id="board"
-              name="view-option"
-              value="board"
-              class="radio-input"
-            />
-            <label for="board" class="radio-label">
-              <!-- grid -->
-              <!-- <iconify-icon
-                icon="ic:round-grid-view"
-                style="color: black"
-                width="24"
-                height="24"
-              ></iconify-icon> -->
-              <span>Project 2</span>
-            </label>
-          </div>
         </div>
       </div>
       <div class="maxw-width-container">
@@ -93,7 +61,7 @@
             Add task
           </button>
           <span id="project-desc">Title</span>
-          <div>
+          <div class="hidden">
             <label for="search-bar">Search:</label>
             <input type="text" id="search-bar">
           </div>
@@ -197,11 +165,11 @@
         <h1 class="header">Add Project</h1>
         <form class="form" id="addTaskForm" autocomplete="off">
           <label for="name" class="label">Name</label>
-          <input type="text" name="name" id="name" class="input white-background" required/>
+          <input type="text" name="name" id="ProjectTitle" class="input white-background" required/>
           <label for="description" class="label">Description</label>
-          <textarea name="description" id="description" rows="8" class="textarea-input white-background"></textarea>
+          <textarea name="description" id="Projectdescription" rows="8" class="textarea-input white-background"></textarea>
           <div class="text-center">
-            <button type="submit" id="addTask" class="button regular-button pink-background cta-button">
+            <button type="submit" id="add-project-func" class="button regular-button pink-background cta-button">
               Start New Project
             </button>
           </div>
@@ -279,7 +247,7 @@
         </div>
         <div class="flex items-center">
           <h1 class="header min-width">Status</h1>
-          <p class="value status-value" id="curTaskStatus">
+          <p class="value" id="curTaskStatus">
             <span class="circle blue-background"></span><span></span>
           </p>
         
@@ -354,7 +322,7 @@
           <!-- History -->
           <button
           id="task-history-cta"
-          class="button circle-button pink-background flex justify-center items-center">
+          class="button circle-button pink-background flex justify-center items-center hidden">
         <img src="../img/historyy.png" alt="">
         </button>
         <button
@@ -368,9 +336,9 @@
 
 <!--  -->
     <div id="project-quickview">
-      <div class="flex quickview-line"><div class="circle pink-background"></div>: X</div>
-      <div class="flex quickview-line"><div class="circle blue-background"></div>: Y</div>
-      <div class="flex quickview-line"><div class="circle green-background"></div>: Z</div>
+      <div class="flex quickview-line" id="to-do-counter"><div class="circle pink-background"></div>: X</div>
+      <div class="flex quickview-line" id="progress-counter"><div class="circle blue-background"></div>: Y</div>
+      <div class="flex quickview-line" id="done-counter"><div class="circle green-background"></div>: Z</div>
     </div>
 
     

@@ -142,4 +142,5 @@ footer img {
 a {
     text-decoration: none;
     color: black;
+    border-color: transparent;
 }
