@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Management System - Dashboard</title>
+    <!-- google font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <!-- main css -->
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+  </head>
+  <body>
+    <div class="content-container disable-padding-top">
+      <div class="max-width-container green-background navbar">
+        <div class="header flex items-center justify-between">
+          <h1 class="title"><img src="../img/taskey.png" alt=""></h1>
+          <div><h1 id="greeting">Welcome Fname</h1></div>
+          <div class="buttons-container">
+            <button id="add-project-cta" class="button regular-button blue-background show-modal" aria-haspopup="true">Add Project</button>
+            <button class="sign-out-cta" id="signOut">Sign out</button>
+          </div>
+        </div>
+      </div>
+      <div class="radio-buttons-container disable-margin-top">
+        <div class="max-width-container flex" id="project-display"></div>
+      </div>
+      <div class="max-width-container add-task-container">
+        <button id="add-task-cta" class="button regular-button blue-background show-modal" aria-haspopup="true">Add task</button>
+        <div>
+          <label for="search-bar">Search:</label>
+          <input type="text" id="search-bar">
+        </div>
+      </div>
+      <div class="max-width-container">
+        <div class="list-view project-container">
+          <div id="list-view" class="list-view">
+            <!-- To-do -->
+            <div class="list-container pink">
+              <h2 class="list-header">
+                <span class="circle pink-background"></span><span class="text">To do</span>
+              </h2>
+              <ul class="tasks-list" id="ulTo-do">
+                <!-- example tasks -->
+                <li class="task-item">Task 1</li>
+                <li class="task-item">Task 2</li>
+              </ul>
+            </div>
+            <!-- Doing tasks -->
+            <div class="list-container blue">
+              <h2 class="list-header">
+                <span class="circle blue-background"></span><span class="text">Doing</span>
+              </h2>
+              <ul class="tasks-list" id="ulDoing">
+                <!-- example tasks -->
+                <li class="task-item">Task 3</li>
+                <li class="task-item">Task 4</li>
+              </ul>
+            </div>
+            <!-- Done -->
+            <div class="list-container green">
+              <h2 class="list-header">
+                <span class="circle green-background"></span><span class="text">Done</span>
+              </h2>
+              <ul class="tasks-list" id="ulDone">
+                <!-- example tasks -->
+                <li class="task-item">Task 5</li>
+                <li class="task-item">Task 6</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- import IconifyIcon web component -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>
+    <!-- js -->
+    <script src="../js/main.js"></script>
+    <script src="../js/dashBoard.js"></script>
+    <script>
+      // وظيفة البحث
+      document.getElementById('search-bar').addEventListener('keyup', function() {
+        let searchTerm = this.value.toLowerCase();
+        let tasks = document.querySelectorAll('.task-item');
+
+        tasks.forEach(function(task) {
+          if (task.textContent.toLowerCase().includes(searchTerm)) {
+            task.style.display = '';
+          } else {
+            task.style.display = 'none';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
