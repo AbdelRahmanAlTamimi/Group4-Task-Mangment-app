@@ -14,10 +14,7 @@ const addProjBtn = document.getElementById("add-project-func");
 addProjBtn.addEventListener("click", (e) => {
   e.preventDefault();
   createProject();
-  // activeOverlay.classList.add("hide");
-  // activeOverlay = null;
-  // document.body.classList.remove("overflow-hidden");
-  // renderProjects()
+  
 });
 
 const projectBar = document.querySelector(".radio-buttons-container");
