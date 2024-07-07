@@ -8,7 +8,7 @@ Tasky is a task management tool that helps individuals and teams organize and tr
 - [Features](#features)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
-- [License] (#license)
+- [License](#license)
 
 ## Introduction
 
